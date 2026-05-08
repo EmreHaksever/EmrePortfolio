@@ -7,4 +7,6 @@ public interface IProjectService
     Task<List<ProjectDto>> GetAllProjectsAsync();
     Task<ProjectDto> GetProjectByIdAsync(int id);
     Task AddProjectAsync(CreateProjectDto createProjectDto);
+    Task UpdateProjectAsync(UpdateProjectDto updateProjectDto);
+    Task DeleteProjectAsync(int id);
 }

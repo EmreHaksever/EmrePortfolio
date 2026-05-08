@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Portfolio.Business.Abstract;
 using Portfolio.Business.DTOs;
 
@@ -23,6 +24,7 @@ public class ProfileInfosController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> AddProfileInfo([FromBody] CreateProfileInfoDto createProfileInfoDto)
     {
         await _profileInfoService.AddProfileInfoAsync(createProfileInfoDto);

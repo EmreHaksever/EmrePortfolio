@@ -11,6 +11,7 @@ public class PortfolioDbContext : DbContext
     }
 
     // Veritabanında oluşacak tablolarımız
+    public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<ProfileInfo> ProfileInfos { get; set; }
     public DbSet<Experience> Experiences { get; set; }
     public DbSet<Project> Projects { get; set; }

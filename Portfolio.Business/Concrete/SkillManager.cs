@@ -30,4 +30,23 @@ public class SkillManager : ISkillService
         await _context.Skills.AddAsync(skill);
         await _context.SaveChangesAsync();
     }
+
+    public async Task UpdateSkillAsync(UpdateSkillDto updateSkillDto)
+    {
+        // DTO'yu Entity'ye çevirip veritabanında güncelliyoruz
+        var skill = _mapper.Map<Skill>(updateSkillDto);
+        _context.Skills.Update(skill);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteSkillAsync(int id)
+    {
+        // Id üzerinden yeteneği bulup siliyoruz
+        var skill = await _context.Skills.FindAsync(id);
+        if (skill != null)
+        {
+            _context.Skills.Remove(skill);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

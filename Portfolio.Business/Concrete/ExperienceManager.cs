@@ -34,4 +34,20 @@ public class ExperienceManager : IExperienceService
         await _context.Experiences.AddAsync(experience);
         await _context.SaveChangesAsync();
     }
+    public async Task UpdateExperienceAsync(UpdateExperienceDto updateExperienceDto)
+    {
+        var experience = _mapper.Map<Experience>(updateExperienceDto);
+        _context.Experiences.Update(experience);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteExperienceAsync(int id)
+    {
+        var experience = await _context.Experiences.FindAsync(id);
+        if (experience != null)
+        {
+            _context.Experiences.Remove(experience);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

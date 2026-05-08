@@ -1,18 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Portfolio.Business.Abstract;
 using Portfolio.Business.DTOs;
 using Portfolio.DataAccess.Contexts;
 using Portfolio.Domain.Entities;
+
 
 namespace Portfolio.Business.Concrete;
 
 public class ProjectManager : IProjectService
 {
     private readonly PortfolioDbContext _context;
+    private readonly IMapper _mapper; // AutoMapper'ı tanımlıyoruz
 
-    public ProjectManager(PortfolioDbContext context)
+    public ProjectManager(PortfolioDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper; // Gelen nesneyi field'a atıyoruz
     }
 
     public async Task<List<ProjectDto>> GetAllProjectsAsync()
@@ -45,6 +49,25 @@ public class ProjectManager : IProjectService
             TechnicalDetail = project.TechnicalDetail,
             Tags = project.Tags
         };
+    }
+
+    public async Task UpdateProjectAsync(UpdateProjectDto updateProjectDto)
+    {
+        // Gelen DTO'yu Entity'ye çevir ve güncelle
+        var project = _mapper.Map<Project>(updateProjectDto);
+        _context.Projects.Update(project);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteProjectAsync(int id)
+    {
+        // Önce veritabanında bu id'ye sahip proje var mı diye bul, varsa sil
+        var project = await _context.Projects.FindAsync(id);
+        if (project != null)
+        {
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task AddProjectAsync(CreateProjectDto createProjectDto)
