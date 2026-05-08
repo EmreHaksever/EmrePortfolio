@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portfolio.Business.Abstract;
+using Portfolio.Business.DTOs;
 using Portfolio.DataAccess.Contexts;
 using Portfolio.Domain.Entities;
 
@@ -9,26 +10,55 @@ public class ProjectManager : IProjectService
 {
     private readonly PortfolioDbContext _context;
 
-    // Dependency Injection: DbContext'i dışarıdan (Program.cs'den) talep ediyoruz.
     public ProjectManager(PortfolioDbContext context)
     {
         _context = context;
     }
 
-    public async Task<List<Project>> GetAllProjectsAsync()
+    public async Task<List<ProjectDto>> GetAllProjectsAsync()
     {
-        // Tüm projeleri asenkron olarak veritabanından çek.
-        return await _context.Projects.ToListAsync();
+        var projects = await _context.Projects.ToListAsync();
+
+        // Entity listesini DTO listesine çeviriyoruz (Mapping)
+        var projectDtos = projects.Select(p => new ProjectDto
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Summary = p.Summary,
+            TechnicalDetail = p.TechnicalDetail,
+            Tags = p.Tags
+        }).ToList();
+
+        return projectDtos;
     }
 
-    public async Task<Project> GetProjectByIdAsync(int id)
+    public async Task<ProjectDto> GetProjectByIdAsync(int id)
     {
-        return await _context.Projects.FindAsync(id);
+        var project = await _context.Projects.FindAsync(id);
+        if (project == null) return null;
+
+        return new ProjectDto
+        {
+            Id = project.Id,
+            Name = project.Name,
+            Summary = project.Summary,
+            TechnicalDetail = project.TechnicalDetail,
+            Tags = project.Tags
+        };
     }
 
-    public async Task AddProjectAsync(Project project)
+    public async Task AddProjectAsync(CreateProjectDto createProjectDto)
     {
-        await _context.Projects.AddAsync(project);
-        await _context.SaveChangesAsync(); // Değişiklikleri veritabanına kaydet
+        // Dışarıdan gelen DTO'yu veritabanı nesnesine (Entity) çeviriyoruz
+        var newProject = new Project
+        {
+            Name = createProjectDto.Name,
+            Summary = createProjectDto.Summary,
+            TechnicalDetail = createProjectDto.TechnicalDetail,
+            Tags = createProjectDto.Tags
+        };
+
+        await _context.Projects.AddAsync(newProject);
+        await _context.SaveChangesAsync();
     }
 }

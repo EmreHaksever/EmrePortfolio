@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.Business.Abstract;
+using Portfolio.Business.DTOs;
 using Portfolio.Domain.Entities;
 
 namespace Portfolio.API.Controllers;
@@ -26,17 +27,17 @@ public class ProjectsController : ControllerBase
 
     // POST: api/projects
     [HttpPost]
-    public async Task<IActionResult> AddProject([FromBody] Project project)
+    public async Task<IActionResult> AddProject([FromBody] CreateProjectDto createProjectDto)
     {
-        // Gelen veri boş mu kontrolü
-        if (project == null)
+        if (createProjectDto == null)
         {
             return BadRequest("Proje verisi boş olamaz.");
         }
 
-        await _projectService.AddProjectAsync(project);
+        await _projectService.AddProjectAsync(createProjectDto);
 
-        // Başarılı olursa 201 Created döner ve eklenen projeyi gösterir
-        return CreatedAtAction(nameof(GetAllProjects), new { id = project.Id }, project);
+        return Ok(new { message = "Proje başarıyla eklendi." });
     }
+
+        // Başarılı olursa 201 Created döner ve eklenen projeyi gösteri
 }
