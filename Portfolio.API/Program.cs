@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Portfolio.DataAccess.Contexts;
+using Portfolio.Business.Abstract;
+using Portfolio.Business.Concrete;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Sisteme diyoruz ki: "Biri senden IProjectService isterse, ona ProjectManager ver."
+builder.Services.AddScoped<IProjectService, ProjectManager>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
