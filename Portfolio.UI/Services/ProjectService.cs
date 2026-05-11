@@ -31,4 +31,17 @@ public class ProjectService
         var response = await _httpClient.DeleteAsync($"api/projects/{id}");
         return response.IsSuccessStatusCode;
     }
+
+    // Tek bir projeyi ID'sine göre getir
+    public async Task<ProjectDto> GetProjectByIdAsync(int id)
+    {
+        return await _httpClient.GetFromJsonAsync<ProjectDto>($"api/projects/{id}");
+    }
+
+    // Projeyi güncelle
+    public async Task<bool> UpdateProjectAsync(UpdateProjectDto updateProjectDto)
+    {
+        var response = await _httpClient.PutAsJsonAsync("api/projects", updateProjectDto);
+        return response.IsSuccessStatusCode;
+    }
 }

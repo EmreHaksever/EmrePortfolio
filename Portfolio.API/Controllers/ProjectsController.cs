@@ -26,6 +26,20 @@ public class ProjectsController : ControllerBase
         return Ok(projects);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProjectById(int id)
+    {
+        var project = await _projectService.GetProjectByIdAsync(id);
+
+        if (project == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(project);
+    }
+
+
     // POST: api/projects
     [HttpPost]
     [Authorize]

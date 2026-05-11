@@ -41,7 +41,7 @@
                         <td>@project.Summary</td>
                         <td><span class="badge bg-secondary">@project.Tags</span></td>
                         <td>
-                            <button class="btn btn-sm btn-warning">Düzenle</button>
+                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/projects/edit/{project.Id}")'>Düzenle</button>
                             <button class="btn btn-sm btn-danger" @onclick="() => DeleteProject(project.Id)">Sil</button>
                         </td>
                     </tr>
