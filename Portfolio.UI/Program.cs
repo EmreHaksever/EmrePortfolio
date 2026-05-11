@@ -24,6 +24,7 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().Cre
 // 4. Diðer Servisler
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<ProjectService>();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 

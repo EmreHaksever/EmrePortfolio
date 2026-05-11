@@ -1,10 +1,19 @@
 ﻿@page "/admin"
 @attribute [Authorize]
+@using Portfolio.UI.Services
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
 
-<div class="container mt-5">
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-success">Admin Paneli</h2>
+        <button class="btn btn-outline-danger" @onclick="HandleLogout">
+            <i class="bi bi-box-arrow-right"></i> Çıkış Yap
+        </button>
+    </div>
+
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1 class="display-4 text-success">Hoş Geldin Admin!</h1>
             <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yönetebilirsin.</p>
             <hr />
         </div>
@@ -12,11 +21,11 @@
 
     <div class="row mt-4">
         <div class="col-md-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm border-primary">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Projeler</h5>
+                    <h5 class="card-title text-primary">Projeler</h5>
                     <p class="card-text">Portfolyondaki projeleri ekle, sil veya güncelle.</p>
-                    <button class="btn btn-outline-primary">Projeleri Yönet</button>
+                    <button class="btn btn-primary" @onclick='() => NavigationManager.NavigateTo("/admin/projects")'>Projeleri Yönet</button>
                 </div>
             </div>
         </div>
@@ -24,5 +33,9 @@
 </div>
 
 @code {
-    // Şimdilik C# kodumuz yok, arayüzü görüyoruz.
+    private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+        NavigationManager.NavigateTo("/login");
+    }
 }
