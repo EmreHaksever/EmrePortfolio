@@ -3,9 +3,15 @@
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
 @inject ProjectService ProjectService
+@inject NavigationManager NavigationManager
 
 <div class="container mt-4">
-    <h3>Projeler Yönetimi</h3>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Projeler Yönetimi</h3>
+        <button class="btn btn-success" @onclick='() => NavigationManager.NavigateTo("/admin/projects/add")'>
+            + Yeni Proje Ekle
+        </button>
+    </div>
     <hr />
 
     @if (projects == null)
@@ -14,11 +20,11 @@
     }
     else if (!projects.Any())
     {
-        <p>Henüz hiç proje eklenmemiş.</p>
+        <div class="alert alert-info">Henüz hiç proje eklenmemiş.</div>
     }
     else
     {
-        <table class="table table-striped table-hover mt-3">
+        <table class="table table-striped table-hover mt-3 shadow-sm">
             <thead class="table-dark">
                 <tr>
                     <th>Proje Adı</th>
@@ -31,12 +37,12 @@
                 @foreach (var project in projects)
                 {
                     <tr>
-                        <td>@project.Name</td>
+                        <td><strong>@project.Name</strong></td>
                         <td>@project.Summary</td>
-                        <td>@project.Tags</td>
+                        <td><span class="badge bg-secondary">@project.Tags</span></td>
                         <td>
                             <button class="btn btn-sm btn-warning">Düzenle</button>
-                            <button class="btn btn-sm btn-danger">Sil</button>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteProject(project.Id)">Sil</button>
                         </td>
                     </tr>
                 }
@@ -50,7 +56,22 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Sayfa açılır açılmaz projeleri API'den çek
+        await LoadProjects();
+    }
+
+    private async Task LoadProjects()
+    {
         projects = await ProjectService.GetAllProjectsAsync();
+    }
+
+    private async Task DeleteProject(int id)
+    {
+        // Gerçek bir projede buraya "Emin misiniz?" pop-up'ı konur ama şimdilik direkt siliyoruz :)
+        var isSuccess = await ProjectService.DeleteProjectAsync(id);
+        if (isSuccess)
+        {
+            // Silme başarılıysa listeyi yenile
+            await LoadProjects();
+        }
     }
 }

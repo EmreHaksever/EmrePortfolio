@@ -1,0 +1,60 @@
+﻿@page "/admin/projects/add"
+@attribute [Authorize]
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ProjectService ProjectService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Yeni Proje Ekle</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Proje Adı</label>
+                        <input type="text" class="form-control" @bind="newProject.Name" placeholder="Örn: Mini ERP Sistemi" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kısa Özet</label>
+                        <input type="text" class="form-control" @bind="newProject.Summary" placeholder="Örn: Sipariş ve stok takibi için yapılmış bir sistem." />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Teknik Detaylar</label>
+                        <textarea class="form-control" rows="4" @bind="newProject.TechnicalDetail" placeholder="Örn: .NET Core, MSSQL, Entity Framework kullanılarak geliştirildi."></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kullanılan Teknolojiler (Etiketler)</label>
+                        <input type="text" class="form-control" @bind="newProject.Tags" placeholder="Örn: C#, .NET 8, React, SQL" />
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/projects")'>Geri Dön</button>
+                        <button class="btn btn-success" @onclick="HandleSave">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateProjectDto newProject = new CreateProjectDto();
+
+    private async Task HandleSave()
+    {
+        var isSuccess = await ProjectService.CreateProjectAsync(newProject);
+        if (isSuccess)
+        {
+            // Kayıt başarılıysa projeler listesine geri dön
+            NavigationManager.NavigateTo("/admin/projects");
+        }
+    }
+}
