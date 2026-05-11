@@ -78,6 +78,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -86,11 +96,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("AllowAll"); // Kimlik doðrulama (Authentication) satýrýndan ÖNCE olmalý!
+
 app.UseAuthentication(); // Önce kimlik doðrula
 
 app.UseAuthorization();  // Sonra yetkilendir
 
 app.UseHttpsRedirection();
+
+
 
 app.UseAuthorization();
 

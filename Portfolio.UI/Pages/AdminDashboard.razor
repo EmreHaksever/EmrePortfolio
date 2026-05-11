@@ -1,0 +1,28 @@
+﻿@page "/admin"
+@attribute [Authorize]
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="display-4 text-success">Hoş Geldin Admin!</h1>
+            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yönetebilirsin.</p>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Projeler</h5>
+                    <p class="card-text">Portfolyondaki projeleri ekle, sil veya güncelle.</p>
+                    <button class="btn btn-outline-primary">Projeleri Yönet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // Şimdilik C# kodumuz yok, arayüzü görüyoruz.
+}

@@ -1,0 +1,56 @@
+﻿@page "/login"
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Admin Girişi</h3>
+
+                    @if (!string.IsNullOrEmpty(errorMessage))
+                    {
+                        <div class="alert alert-danger">@errorMessage</div>
+                    }
+
+                    <div class="mb-3">
+                        <label class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" @bind="loginModel.Username" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Şifre</label>
+                        <input type="password" class="form-control" @bind="loginModel.Password" />
+                    </div>
+
+                    <button class="btn btn-primary w-100" @onclick="HandleLogin">Giriş Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginDto loginModel = new LoginDto();
+    private string errorMessage = "";
+
+    private async Task HandleLogin()
+    {
+        errorMessage = ""; // Önceki hataları temizle
+
+        var isSuccess = await AuthService.LoginAsync(loginModel);
+
+        if (isSuccess)
+        {
+            // Başarılıysa Admin paneline yönlendir
+            NavigationManager.NavigateTo("/admin");
+        }
+        else
+        {
+            errorMessage = "Kullanıcı adı veya şifre hatalı!";
+        }
+    }
+}
