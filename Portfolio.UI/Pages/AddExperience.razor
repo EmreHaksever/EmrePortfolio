@@ -1,0 +1,87 @@
+﻿@page "/admin/experiences/add"
+@attribute [Authorize]
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ExperienceService ExperienceService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-success">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Yeni Deneyim Ekle</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Pozisyon / Ünvan</label>
+                        <input type="text" class="form-control" @bind="newExperience.Title" placeholder="Örn: Yazılım Geliştirici, Kurucu" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Şirket / Kurum</label>
+                        <input type="text" class="form-control" @bind="newExperience.Company" placeholder="Örn: YAE3D" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Konum</label>
+                        <input type="text" class="form-control" @bind="newExperience.Location" placeholder="Örn: Konya, İstanbul, Uzaktan" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Açıklama (Ne yaptın?)</label>
+                        <textarea class="form-control" rows="4" @bind="newExperience.Description" placeholder="Örn: .NET Core ile Ar-Ge projeleri geliştirdim..."></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Başlangıç Tarihi</label>
+                            <input type="date" class="form-control" @bind="newExperience.StartDate" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Bitiş Tarihi</label>
+                            <input type="date" class="form-control" @bind="newExperience.EndDate" disabled="@newExperience.IsCurrent" />
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="isCurrentCheck" @bind="newExperience.IsCurrent">
+                        <label class="form-check-label" for="isCurrentCheck">
+                            Bu pozisyonda hala çalışıyorum
+                        </label>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/experiences")'>İptal</button>
+                        <button class="btn btn-success" @onclick="HandleSave">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateExperienceDto newExperience = new CreateExperienceDto
+    {
+        StartDate = DateTime.Now, // Varsayılan olarak bugünü seçsin
+        IsCurrent = false
+    };
+
+    private async Task HandleSave()
+    {
+        // Eğer "Devam Ediyor" seçiliyse, bitiş tarihini null yapıp veritabanını temiz tutuyoruz
+        if (newExperience.IsCurrent)
+        {
+            newExperience.EndDate = null;
+        }
+
+        var isSuccess = await ExperienceService.CreateExperienceAsync(newExperience);
+        if (isSuccess)
+        {
+            NavigationManager.NavigateTo("/admin/experiences");
+        }
+    }
+}
