@@ -26,6 +26,18 @@ public class ExperienceManager : IExperienceService
         return _mapper.Map<List<ExperienceDto>>(experiences);
     }
 
+    public async Task<ExperienceDto> GetExperienceByIdAsync(int id)
+    {
+        // 1. Veritabanından veriyi çekiyoruz (Dal veya Repository ismin neyse ona göre uyarla)
+        var experience = await _context.Experiences.FindAsync(id);
+        // veya: await _experienceRepository.GetByIdAsync(id);
+
+        if (experience == null)
+        {
+            return null;
+        }
+        return _mapper.Map<ExperienceDto>(experience);
+    }
     public async Task AddExperienceAsync(CreateExperienceDto createExperienceDto)
     {
         // Gelen DTO nesnesini tek satırda Entity nesnesine çevirir!

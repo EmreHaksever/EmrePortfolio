@@ -23,6 +23,19 @@ public class ExperiencesController : ControllerBase
         return Ok(experiences);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetExperienceById(int id)
+    {
+        var experience = await _experienceService.GetExperienceByIdAsync(id);
+
+        if (experience == null)
+        {
+            return NotFound("Deneyim bulunamadı.");
+        }
+
+        return Ok(experience);
+    }
+
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> AddExperience([FromBody] CreateExperienceDto createExperienceDto)
