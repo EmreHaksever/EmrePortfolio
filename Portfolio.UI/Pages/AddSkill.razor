@@ -1,0 +1,61 @@
+﻿@page "/admin/skills/add"
+@attribute [Authorize]
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject SkillService SkillService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-info">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Yeni Yetenek Ekle</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Yetenek Adı</label>
+                        <input type="text" class="form-control" @bind="newSkill.Name" placeholder="Örn: C#, React Native, 3D Modelleme" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select class="form-select" @bind="newSkill.Category">
+                            <option value="">Seçiniz...</option>
+                            <option value="Backend">Backend / Sunucu</option>
+                            <option value="Frontend">Frontend / Arayüz</option>
+                            <option value="Mobile">Mobil Geliştirme</option>
+                            <option value="Database">Veritabanı</option>
+                            <option value="Design">Tasarım / 3D İmalat</option>
+                            <option value="Other">Diğer</option>
+                        </select>
+                        <div class="form-text text-muted">Yeteneğinizi uygun bir kategoriye atayın.</div>
+                    </div>
+                    
+
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/skills")'>İptal</button>
+                        <button class="btn btn-info text-white" @onclick="HandleSave">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateSkillDto newSkill = new CreateSkillDto
+    {
+       
+    };
+
+    private async Task HandleSave()
+    {
+        var isSuccess = await SkillService.CreateSkillAsync(newSkill);
+        if (isSuccess)
+        {
+            NavigationManager.NavigateTo("/admin/skills");
+        }
+    }
+}

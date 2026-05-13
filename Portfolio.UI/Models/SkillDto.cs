@@ -4,18 +4,18 @@ public class SkillDto
 {
     public int Id { get; set; }
     public string Name { get; set; } // Örn: C# & .NET, React Native, 3D İmalat
-    public byte Level { get; set; }  // Örn: 85 (Yüzdelik dilim için)
+    public string Category { get; set; } // Bunu ekliyoruz (Backend'de tipinin string olduğunu varsayıyorum)
 }
 
 public class CreateSkillDto
 {
     public string Name { get; set; }
-    public byte Level { get; set; }
+    public string Category { get; set; } // Bunu ekliyoruz (Backend'de tipinin string olduğunu varsayıyorum)
 }
 
 public class UpdateSkillDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public byte Level { get; set; }
+    public string Category { get; set; } // Bunu ekliyoruz (Backend'de tipinin string olduğunu varsayıyorum)
 }

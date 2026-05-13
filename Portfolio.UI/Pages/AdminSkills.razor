@@ -1,0 +1,73 @@
+﻿@page "/admin/skills"
+@attribute [Authorize]
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject SkillService SkillService
+@inject NavigationManager NavigationManager
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Yetenekler Yönetimi</h3>
+        <button class="btn btn-success" @onclick='() => NavigationManager.NavigateTo("/admin/skills/add")'>
+            + Yeni Yetenek Ekle
+        </button>
+    </div>
+    <hr />
+
+    @if (skills == null)
+    {
+        <p><em>Yetenekler yükleniyor...</em></p>
+    }
+    else if (!skills.Any())
+    {
+        <div class="alert alert-info">Henüz hiç yetenek eklenmemiş.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-hover mt-3 shadow-sm align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Yetenek Adı</th>
+                    <th>Kategori</th>
+                    <th class="text-end">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var skill in skills)
+                {
+                    <tr>
+                        <td><strong>@skill.Name</strong></td>
+                        <td><span class="badge bg-secondary">@skill.Category</span></td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/skills/edit/{skill.Id}")'>Düzenle</button>
+                            <button class="btn btn-sm btn-danger" @onclick="() => DeleteSkill(skill.Id)">Sil</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<SkillDto> skills;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadSkills();
+    }
+
+    private async Task LoadSkills()
+    {
+        skills = await SkillService.GetAllSkillsAsync();
+    }
+
+    private async Task DeleteSkill(int id)
+    {
+        var isSuccess = await SkillService.DeleteSkillAsync(id);
+        if (isSuccess)
+        {
+            await LoadSkills();
+        }
+    }
+}

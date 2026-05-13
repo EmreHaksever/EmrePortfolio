@@ -11,4 +11,5 @@ public class Skill
     public int Id { get; set; }
     public string Name { get; set; } // Örn: "Docker"
     public string Category { get; set; } // Örn: "Araçlar & DevOps"
+
 }
