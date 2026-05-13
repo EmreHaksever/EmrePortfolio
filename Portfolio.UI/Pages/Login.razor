@@ -1,4 +1,4 @@
-ï»¿@page "/login"
+@page "/login"
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
 @inject AuthService AuthService
@@ -9,7 +9,7 @@
         <div class="col-md-4">
             <div class="card shadow">
                 <div class="card-body">
-                    <h3 class="text-center mb-4">Admin GiriÅŸi</h3>
+                    <h3 class="text-center mb-4">Admin Giriþi</h3>
 
                     @if (!string.IsNullOrEmpty(errorMessage))
                     {
@@ -17,16 +17,16 @@
                     }
 
                     <div class="mb-3">
-                        <label class="form-label">KullanÄ±cÄ± AdÄ±</label>
+                        <label class="form-label">Kullanýcý Adý</label>
                         <input type="text" class="form-control" @bind="loginModel.Username" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Åžifre</label>
+                        <label class="form-label">Þifre</label>
                         <input type="password" class="form-control" @bind="loginModel.Password" />
                     </div>
 
-                    <button class="btn btn-primary w-100" @onclick="HandleLogin">GiriÅŸ Yap</button>
+                    <button class="btn btn-primary w-100" @onclick="HandleLogin">Giriþ Yap</button>
                 </div>
             </div>
         </div>
@@ -39,18 +39,18 @@
 
     private async Task HandleLogin()
     {
-        errorMessage = ""; // Ã–nceki hatalarÄ± temizle
+        errorMessage = ""; // Önceki hatalarý temizle
 
         var isSuccess = await AuthService.LoginAsync(loginModel);
 
         if (isSuccess)
         {
-            // BaÅŸarÄ±lÄ±ysa Admin paneline yÃ¶nlendir
+            // Baþarýlýysa Admin paneline yönlendir
             NavigationManager.NavigateTo("/admin");
         }
         else
         {
-            errorMessage = "KullanÄ±cÄ± adÄ± veya ÅŸifre hatalÄ±!";
+            errorMessage = "Kullanýcý adý veya þifre hatalý!";
         }
     }
 }

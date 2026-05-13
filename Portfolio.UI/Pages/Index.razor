@@ -1,37 +1,100 @@
-﻿@page "/"
+@page "/"
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
 @inject ProfileService ProfileService
 
-@if (profile == null)
-{
-    <div class="d-flex justify-content-center mt-5"><div class="spinner-border text-primary"></div></div>
-}
-else
-{
-    <div class="hero-section bg-light py-5 border-bottom">
-        <div class="container text-center py-5">
-            <h1 class="display-4 fw-bold text-dark">Merhaba, Ben @profile.FullName</h1>
-            <p class="lead text-muted mb-4">@profile.Title</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="/projects" class="btn btn-primary btn-lg px-4 gap-3">Projelerimi İncele</a>
-                <a href="/contact" class="btn btn-outline-secondary btn-lg px-4">Bana Ulaş</a>
+<div class="container py-5">
+    @if (profile == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+            <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                <span class="visually-hidden">Yükleniyor...</span>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <!-- Hero Section -->
+        <div class="row align-items-center mb-5" style="min-height: 60vh;">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <div class="badge badge-custom mb-3">
+                    <i class="bi bi-stars me-1"></i> Portfolyoma Hoş Geldiniz
+                </div>
+                <h1 class="display-3 fw-bold  mb-3">
+                    Merhaba, Ben <span style="color: var(--accent-primary);">@profile.FullName</span>
+                </h1>
+                <h2 class="h3 text-secondary mb-3 fw-light">@profile.Title</h2>
+                
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-4" style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2);">
+                    <i class="bi bi-mortarboard-fill" style="color: var(--accent-primary);"></i>
+                    <span class="fw-medium" style="color: var(--text-primary);">Akademik Ortalama:</span>
+                    <strong style="color: var(--accent-primary);">@profile.Gpa <span class="fw-normal" style="opacity: 0.7;">/ 4.00</span></strong>
+                </div>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2 class="fw-bold">Kısa Bir Özet</h2>
-                <p class="fs-5 text-muted">@profile.Summary</p>
-                <div class="mt-4">
-                    <span class="badge rounded-pill bg-success p-3">Akademik Ortalama: @profile.Gpa / 4.00</span>
+                <p class="lead text-secondary mb-5" style="line-height: 1.8;">
+                    @profile.Summary
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="/projects" class="btn btn-primary btn-lg d-flex align-items-center gap-2">
+                        <i class="bi bi-grid"></i> Projelerimi İncele
+                    </a>
+                    <a href="/contact" class="btn btn-outline btn-lg d-flex align-items-center gap-2">
+                        <i class="bi bi-envelope"></i> Bana Ulaş
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Side Profile Photo -->
+            <div class="col-lg-5 d-flex justify-content-center align-items-center mt-5 mt-lg-0">
+                <div class="position-relative hover-card" style="width: 320px; height: 320px;">
+                    <!-- Decorator blur circles -->
+                    <div class="position-absolute" style="top: -20px; right: -20px; width: 150px; height: 150px; background: var(--accent-primary); filter: blur(60px); opacity: 0.5; z-index: 0;"></div>
+                    <div class="position-absolute" style="bottom: -20px; left: -20px; width: 150px; height: 150px; background: var(--accent-purple); filter: blur(60px); opacity: 0.5; z-index: 0;"></div>
+                    
+                    <!-- Profile Image Container -->
+                    <div class="glass-panel w-100 h-100 position-relative z-1 p-2 rounded-circle d-flex align-items-center justify-content-center" style="box-shadow: var(--glass-shadow);">
+                        <!-- TODO: Kendi fotoğrafınızı projede 'wwwroot/images/profile.jpg' içine ekleyip aşağıdaki src kısmını güncelleyin -->
+                        <img src="images/profile.jpg" 
+                             alt="Profil Fotoğrafı" 
+                             class="w-100 h-100 rounded-circle" 
+                             style="object-fit: cover; border: 4px solid var(--bg-secondary);" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+
+        <!-- Quick Stats or Links -->
+        <div class="row mt-5 g-4">
+            <div class="col-md-4">
+                <a href="@profile.GithubUrl" target="_blank" class="text-decoration-none">
+                    <div class="glass-panel p-4 text-center hover-card">
+                        <i class="bi bi-github fs-1  mb-3"></i>
+                        <h4 class="">GitHub</h4>
+                        <p class="text-secondary mb-0">Açık kaynak projelerim ve kodlarım</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="@profile.LinkedInUrl" target="_blank" class="text-decoration-none">
+                    <div class="glass-panel p-4 text-center hover-card">
+                        <i class="bi bi-linkedin fs-1  mb-3" style="color: #0a66c2 !important;"></i>
+                        <h4 class="">LinkedIn</h4>
+                        <p class="text-secondary mb-0">Profesyonel ağım ve kariyerim</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/skills" class="text-decoration-none">
+                    <div class="glass-panel p-4 text-center hover-card">
+                        <i class="bi bi-lightning-charge-fill fs-1 mb-3" style="color: var(--accent-secondary);"></i>
+                        <h4 class="">Yetenekler</h4>
+                        <p class="text-secondary mb-0">Kullandığım teknolojiler</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
 
 @code {
     private ProfileInfoDto profile;

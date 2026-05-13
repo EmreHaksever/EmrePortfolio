@@ -1,33 +1,48 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="/">EMRE HAKSEVER</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">Anasayfa</NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/projects">Projeler</NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/skills">Yetenekler</NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/experiences">Deneyimler</NavLink>
-                </li>
-                <li class="nav-item">
-                    <NavLink class="nav-link" href="/contact">İletişim</NavLink>
-                </li>
-            </ul>
+<div class="page-wrapper">
+    <nav class="navbar navbar-expand-lg glass-nav fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold  fs-4" href="/">
+                <i class="bi bi-code-slash me-2" style="color: var(--accent-primary);"></i>EMRE<span style="color: var(--accent-primary);">.</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list  fs-2"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <NavLink class="nav-link " href="/" Match="NavLinkMatch.All">Anasayfa</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link " href="/projects">Projeler</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link " href="/skills">Yetenekler</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link " href="/experiences">Deneyimler</NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link " href="/contact">İletişim</NavLink>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<main>
-    @Body
-</main>
+    <main class="content-wrapper" style="padding-top: 100px; padding-bottom: 60px; min-height: calc(100vh - 160px);">
+        @Body
+    </main>
+
+    <footer class="py-4 text-center" style="border-top: 1px solid var(--glass-border); background: var(--bg-secondary);">
+        <div class="container">
+            <div class="d-flex justify-content-center gap-3 mb-3">
+                <a href="#" class=" fs-4 hover-card"><i class="bi bi-github"></i></a>
+                <a href="#" class=" fs-4 hover-card"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class=" fs-4 hover-card"><i class="bi bi-twitter-x"></i></a>
+            </div>
+            <p class="text-secondary mb-0">&copy; @DateTime.Now.Year Emre Haksever. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+</div>

@@ -1,4 +1,4 @@
-ï»¿@page "/admin/skills/add"
+@page "/admin/skills/add"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -9,33 +9,33 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card shadow-sm border-info">
-                <div class="card-header bg-info text-white">
+                <div class="card-header bg-info ">
                     <h4 class="mb-0">Yeni Yetenek Ekle</h4>
                 </div>
                 <div class="card-body">
 
                     <div class="mb-3">
-                        <label class="form-label">Yetenek AdÄ±</label>
-                        <input type="text" class="form-control" @bind="newSkill.Name" placeholder="Ã–rn: C#, React Native, 3D Modelleme" />
+                        <label class="form-label">Yetenek Adý</label>
+                        <input type="text" class="form-control" @bind="newSkill.Name" placeholder="Örn: C#, React Native, 3D Modelleme" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Kategori</label>
                         <select class="form-select" @bind="newSkill.Category">
-                            <option value="">SeÃ§iniz...</option>
+                            <option value="">Seçiniz...</option>
                             <option value="Backend">Backend / Sunucu</option>
-                            <option value="Frontend">Frontend / ArayÃ¼z</option>
-                            <option value="Mobile">Mobil GeliÅŸtirme</option>
-                            <option value="Database">VeritabanÄ±</option>
-                            <option value="Design">TasarÄ±m / 3D Ä°malat</option>
-                            <option value="Other">DiÄŸer</option>
+                            <option value="Frontend">Frontend / Arayüz</option>
+                            <option value="Mobile">Mobil Geliþtirme</option>
+                            <option value="Database">Veritabaný</option>
+                            <option value="Design">Tasarým / 3D Ýmalat</option>
+                            <option value="Other">Diðer</option>
                         </select>
-                        <div class="form-text text-muted">YeteneÄŸinizi uygun bir kategoriye atayÄ±n.</div>
+                        <div class="form-text text-muted">Yeteneðinizi uygun bir kategoriye atayýn.</div>
                     </div>
                     
 
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/skills")'>Ä°ptal</button>
-                        <button class="btn btn-info text-white" @onclick="HandleSave">Kaydet</button>
+                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/skills")'>Ýptal</button>
+                        <button class="btn btn-info " @onclick="HandleSave">Kaydet</button>
                     </div>
 
                 </div>

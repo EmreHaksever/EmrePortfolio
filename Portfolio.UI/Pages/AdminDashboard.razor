@@ -1,4 +1,4 @@
-ï»¿@page "/admin"
+@page "/admin"
 @attribute [Authorize]
 @using Portfolio.UI.Services
 @inject AuthService AuthService
@@ -8,13 +8,13 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-success">Admin Paneli</h2>
         <button class="btn btn-outline-danger" @onclick="HandleLogout">
-            <i class="bi bi-box-arrow-right"></i> Ã‡Ä±kÄ±ÅŸ Yap
+            <i class="bi bi-box-arrow-right"></i> Çýkýþ Yap
         </button>
     </div>
 
     <div class="row">
         <div class="col-md-12 text-center">
-            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yÃ¶netebilirsin.</p>
+            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yönetebilirsin.</p>
             <hr />
         </div>
     </div>
@@ -25,19 +25,19 @@
             <div class="card shadow-sm border-primary h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-primary">Projeler</h5>
-                    <p class="card-text flex-grow-1">Portfolyondaki projeleri ekle, sil veya gÃ¼ncelle.</p>
-                    <button class="btn btn-primary mt-auto" @onclick="GoToProjects">Projeleri YÃ¶net</button>
+                    <p class="card-text flex-grow-1">Portfolyondaki projeleri ekle, sil veya güncelle.</p>
+                    <button class="btn btn-primary mt-auto" @onclick="GoToProjects">Projeleri Yönet</button>
                 </div>
             </div>
         </div>
 
-        @* DENEYÄ°MLER *@
+        @* DENEYÝMLER *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-success h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-success">Deneyimler</h5>
-                    <p class="card-text flex-grow-1">GeÃ§miÅŸ iÅŸ, staj ve giriÅŸim tecrÃ¼belerini buradan yÃ¶net.</p>
-                    <button class="btn btn-success mt-auto" @onclick="GoToExperiences">Deneyim YÃ¶netimi</button>
+                    <p class="card-text flex-grow-1">Geçmiþ iþ, staj ve giriþim tecrübelerini buradan yönet.</p>
+                    <button class="btn btn-success mt-auto" @onclick="GoToExperiences">Deneyim Yönetimi</button>
                 </div>
             </div>
         </div>
@@ -47,19 +47,19 @@
             <div class="card shadow-sm border-info h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-info">Yetenekler</h5>
-                    <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yÃ¶net.</p>
-                    <button class="btn btn-info text-white mt-auto" @onclick="GoToSkills">Yetenekleri YÃ¶net</button>
+                    <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yönet.</p>
+                    <button class="btn btn-info  mt-auto" @onclick="GoToSkills">Yetenekleri Yönet</button>
                 </div>
             </div>
         </div>
 
-        @* PROFÄ°L AYARLARI *@
+        @* PROFÝL AYARLARI *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-warning h-100">
                 <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-warning">Profil AyarlarÄ±</h5>
-                    <p class="card-text flex-grow-1">KiÅŸisel bilgilerini, sosyal medya linklerini ve biyografini dÃ¼zenle.</p>
-                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili DÃ¼zenle</button>
+                    <h5 class="card-title text-warning">Profil Ayarlarý</h5>
+                    <p class="card-text flex-grow-1">Kiþisel bilgilerini, sosyal medya linklerini ve biyografini düzenle.</p>
+                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili Düzenle</button>
                 </div>
             </div>
         </div>

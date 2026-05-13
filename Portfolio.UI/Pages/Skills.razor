@@ -1,0 +1,69 @@
+@page "/skills"
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject SkillService SkillService
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold  mb-3">Yeteneklerim</h2>
+        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+            Kullandığım teknolojiler, diller ve araçlar.
+        </p>
+    </div>
+
+    @if (skills == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Yükleniyor...</span>
+            </div>
+        </div>
+    }
+    else if (!skills.Any())
+    {
+        <div class="alert alert-info glass-panel text-center " role="alert">
+            Henüz eklenmiş bir yetenek bulunmuyor.
+        </div>
+    }
+    else
+    {
+        var groupedSkills = skills.GroupBy(s => s.Category).ToList();
+
+        <div class="row g-4">
+            @foreach (var group in groupedSkills)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-panel p-4 h-100 hover-card">
+                        <div class="d-flex align-items-center mb-4">
+                            <!-- Select an icon based on category loosely, or use a default one -->
+                            <div class="p-3 rounded bg-dark border border-secondary me-3">
+                                <i class="bi bi-braces-asterisk fs-4" style="color: var(--accent-primary);"></i>
+                            </div>
+                            <h4 class=" fw-bold mb-0">@(string.IsNullOrWhiteSpace(group.Key) ? "Diğer" : group.Key)</h4>
+                        </div>
+                        
+                        <div class="d-flex flex-column gap-3">
+                            @foreach (var skill in group)
+                            {
+                                <div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class=" fw-medium">@skill.Name</span>
+                                    </div>
+                                    <!-- Decorative progress bar, always full for aesthetics or could be randomized if there's no proficiency level in Entity -->
+                                    <div class="skill-progress-container">
+                                        <div class="skill-progress-bar w-100"></div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<SkillDto> skills;
+    protected override async Task OnInitializedAsync() => skills = await SkillService.GetAllSkillsAsync();
+}

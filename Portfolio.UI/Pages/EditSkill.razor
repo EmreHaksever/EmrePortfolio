@@ -1,4 +1,4 @@
-﻿@page "/admin/skills/edit/{Id:int}"
+@page "/admin/skills/edit/{Id:int}"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -66,8 +66,8 @@
             updateSkill = new UpdateSkillDto
             {
                 Id = existingSkill.Id,
-                Name = existingSkill.Name
-             
+                Name = existingSkill.Name,
+                Category = existingSkill.Category
             };
         }
     }

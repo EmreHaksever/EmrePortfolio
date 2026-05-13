@@ -1,46 +1,79 @@
-﻿@page "/projects"
+@page "/projects"
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
 @inject ProjectService ProjectService
 
 <div class="container py-5">
-    <h2 class="fw-bold mb-4 text-uppercase">Projelerim</h2>
-    <div class="row">
-        @if (projects == null)
-        {
-            <div class="text-center"><div class="spinner-border"></div></div>
-        }
-        else
-        {
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold  mb-3">Projelerim</h2>
+        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+            Geliştirdiğim uygulamalar, üzerinde çalıştığım teknolojiler ve akademik/profesyonel projelerim.
+        </p>
+    </div>
+
+    @if (projects == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Yükleniyor...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
             @foreach (var project in projects)
             {
-                <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100 shadow-sm border-0">
-                        <div class="card-body">
-                            @* İsimleri Entity'deki gibi güncelledik *@
-                            <h5 class="card-title fw-bold text-primary">@project.Name</h5>
-                            <p class="card-text">@project.Summary</p>
-
-                            @* Etiketleri (Tags) parçalayıp görselleştirelim *@
-                            @if (!string.IsNullOrEmpty(project.Tags))
-                            {
-                                <div class="mt-2">
-                                    @foreach (var tag in project.Tags.Split(','))
-                                    {
-                                        <span class="badge bg-light text-dark border me-1">@tag.Trim()</span>
-                                    }
-                                </div>
-                            }
+                <div class="col-md-6 col-lg-4">
+                    <div class="glass-panel hover-card h-100 d-flex flex-column p-4 position-relative overflow-hidden">
+                        <!-- Subtle background gradient -->
+                        <div class="position-absolute" style="top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--accent-primary), var(--accent-purple));"></div>
+                        
+                        <div class="d-flex justify-content-between align-items-start mb-3 mt-2">
+                            <h4 class=" fw-bold mb-0">@project.Name</h4>
+                            <i class="bi bi-folder2-open fs-3 text-secondary"></i>
                         </div>
-                        <div class="card-footer bg-transparent border-0 pb-3">
-                            @* URL senin Entity'de yokmuş, istersen detaya yönlendirebiliriz veya kaldırabiliriz *@
-                            <button class="btn btn-sm btn-outline-primary">Detayları Gör</button>
+                        
+                        <p class="text-secondary flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">
+                            @project.Summary
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(project.Tags))
+                        {
+                            <div class="d-flex flex-wrap gap-2 mt-4 mb-4">
+                                @foreach (var tag in project.Tags.Split(','))
+                                {
+                                    <span class="badge badge-custom">@tag.Trim()</span>
+                                }
+                            </div>
+                        }
+
+                        <button class="btn btn-outline w-100 mt-auto" data-bs-toggle="modal" data-bs-target="#projectModal-@project.Id">
+                            Teknik Detayları Gör
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal for Technical Details -->
+                <div class="modal fade" id="projectModal-@project.Id" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content glass-panel border-0">
+                            <div class="modal-header border-bottom border-secondary">
+                                <h5 class="modal-title  fw-bold">@project.Name - Teknik Detay</h5>
+                                <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-secondary">
+                                <p style="white-space: pre-wrap;">@project.TechnicalDetail</p>
+                            </div>
+                            <div class="modal-footer border-top border-secondary">
+                                <button type="button" class="btn btn-outline" data-bs-dismiss="modal">Kapat</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
-        }
-    </div>
+        </div>
+    }
 </div>
 
 @code {

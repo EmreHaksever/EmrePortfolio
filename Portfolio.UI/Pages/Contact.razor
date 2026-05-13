@@ -1,47 +1,130 @@
-﻿@page "/contact"
+@page "/contact"
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
+@inject ProfileService ProfileService
 @inject MessageService MessageService
-@inject IJSRuntime Js
 
 <div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 p-4">
-                <h2 class="fw-bold mb-4 text-center">İletişime Geç</h2>
-                <EditForm Model="messageModel" OnValidSubmit="HandleMessage">
-                    <div class="mb-3">
-                        <label class="form-label">Ad Soyad</label>
-                        <InputText class="form-control" @bind-Value="messageModel.FullName" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">E-posta</label>
-                        <InputText class="form-control" @bind-Value="messageModel.Email" type="email" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Konu</label>
-                        <InputText class="form-control" @bind-Value="messageModel.Subject" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Mesajınız</label>
-                        <InputTextArea class="form-control" @bind-Value="messageModel.Content" rows="4" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 py-2">Gönder</button>
-                </EditForm>
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold  mb-3">İletişime Geçin</h2>
+        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+            Projeleriniz, iş teklifleriniz veya sadece merhaba demek için bana ulaşabilirsiniz.
+        </p>
+    </div>
+
+    @if (profile == null)
+    {
+        <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Yükleniyor...</span>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="row g-5">
+            <!-- Contact Info -->
+            <div class="col-lg-5">
+                <div class="d-flex flex-column gap-4">
+                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
+                        <div class="p-3 rounded-circle" style="background: rgba(14, 165, 233, 0.1);">
+                            <i class="bi bi-envelope-fill fs-3" style="color: var(--accent-primary);"></i>
+                        </div>
+                        <div class="ms-4">
+                            <h5 class=" mb-1">E-posta</h5>
+                            <a href="mailto:@profile.Email" class="text-secondary text-decoration-none hover-text-primary">@profile.Email</a>
+                        </div>
+                    </div>
+                    
+                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
+                        <div class="p-3 rounded-circle" style="background: rgba(16, 185, 129, 0.1);">
+                            <i class="bi bi-telephone-fill fs-3" style="color: var(--accent-secondary);"></i>
+                        </div>
+                        <div class="ms-4">
+                            <h5 class=" mb-1">Telefon</h5>
+                            <a href="tel:@profile.Phone" class="text-secondary text-decoration-none">@profile.Phone</a>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
+                        <div class="p-3 rounded-circle" style="background: rgba(139, 92, 246, 0.1);">
+                            <i class="bi bi-geo-alt-fill fs-3" style="color: var(--accent-purple);"></i>
+                        </div>
+                        <div class="ms-4">
+                            <h5 class=" mb-1">Konum</h5>
+                            <span class="text-secondary">Türkiye</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-7">
+                <div class="glass-panel p-4 p-md-5">
+                    <h3 class="fw-bold  mb-4">Mesaj Gönder</h3>
+                    
+                    @if (isSuccess)
+                    {
+                        <div class="alert alert-success glass-panel  border-0" role="alert">
+                            <i class="bi bi-check-circle-fill me-2" style="color: var(--accent-secondary);"></i>
+                            Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağım!
+                        </div>
+                    }
+
+                    <EditForm Model="message" OnValidSubmit="HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary">Ad Soyad</label>
+                                <InputText @bind-Value="message.FullName" class="form-control" placeholder="Adınız Soyadınız" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-secondary">E-posta</label>
+                                <InputText @bind-Value="message.Email" class="form-control" type="email" placeholder="ornek@mail.com" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-secondary">Konu</label>
+                                <InputText @bind-Value="message.Subject" class="form-control" placeholder="Mesajınızın konusu" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-secondary">Mesaj</label>
+                                <InputTextArea @bind-Value="message.Content" class="form-control" rows="5" placeholder="Mesajınız..." required></InputTextArea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center gap-2">
+                                    <i class="bi bi-send"></i> Gönder
+                                </button>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
-    private CreateMessageDto messageModel = new();
-    private async Task HandleMessage()
+    private ProfileInfoDto profile;
+    private CreateMessageDto message = new CreateMessageDto();
+    private bool isSuccess = false;
+
+    protected override async Task OnInitializedAsync()
     {
-        var success = await MessageService.CreateMessageAsync(messageModel);
-        if (success)
-        {
-            await Js.InvokeVoidAsync("alert", "Mesajınız başarıyla iletildi!");
-            messageModel = new(); // Formu sıfırla
-        }
+        profile = await ProfileService.GetProfileAsync();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await MessageService.CreateMessageAsync(message);
+        
+        isSuccess = true;
+        message = new CreateMessageDto(); // Reset form
+        StateHasChanged();
+        
+        // Hide success message after a delay if desired
+        await Task.Delay(5000);
+        isSuccess = false;
+        StateHasChanged();
     }
 }

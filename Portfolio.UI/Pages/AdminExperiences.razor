@@ -1,4 +1,4 @@
-ï»¿@page "/admin/experiences"
+@page "/admin/experiences"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -7,7 +7,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Deneyimler YÃ¶netimi</h3>
+        <h3>Deneyimler Yönetimi</h3>
         <button class="btn btn-success" @onclick='() => NavigationManager.NavigateTo("/admin/experiences/add")'>
             + Yeni Deneyim Ekle
         </button>
@@ -16,22 +16,22 @@
 
     @if (experiences == null)
     {
-        <p><em>Deneyimler yÃ¼kleniyor...</em></p>
+        <p><em>Deneyimler yükleniyor...</em></p>
     }
     else if (!experiences.Any())
     {
-        <div class="alert alert-info">HenÃ¼z hiÃ§ deneyim eklenmemiÅŸ.</div>
+        <div class="alert alert-info">Henüz hiç deneyim eklenmemiþ.</div>
     }
     else
     {
         <table class="table table-striped table-hover mt-3 shadow-sm">
             <thead class="table-dark">
                 <tr>
-                    <th>Pozisyon / Ãœnvan</th>
-                    <th>Åžirket</th>
-                    <th>BaÅŸlangÄ±Ã§</th>
-                    <th>BitiÅŸ</th>
-                    <th>Ä°ÅŸlemler</th>
+                    <th>Pozisyon / Ünvan</th>
+                    <th>Þirket</th>
+                    <th>Baþlangýç</th>
+                    <th>Bitiþ</th>
+                    <th>Ýþlemler</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,7 +52,7 @@
                             }
                         </td>
                         <td>
-                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/experiences/edit/{exp.Id}")'>DÃ¼zenle</button>
+                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/experiences/edit/{exp.Id}")'>Düzenle</button>
                             <button class="btn btn-sm btn-danger" @onclick="() => DeleteExperience(exp.Id)">Sil</button>
                         </td>
                     </tr>

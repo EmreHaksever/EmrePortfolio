@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using Portfolio.UI.Models;
 
 namespace Portfolio.UI.Services;
@@ -17,6 +17,12 @@ public class ProfileService
     public async Task<bool> UpdateProfileAsync(ProfileInfoDto profileDto)
     {
         var response = await _httpClient.PutAsJsonAsync("api/profileinfos", profileDto);
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> CreateProfileAsync(ProfileInfoDto profileDto)
+    {
+        var response = await _httpClient.PostAsJsonAsync("api/profileinfos", profileDto);
         return response.IsSuccessStatusCode;
     }
 }

@@ -1,4 +1,4 @@
-ï»¿@page "/admin/projects"
+@page "/admin/projects"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -7,7 +7,7 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3>Projeler YÃ¶netimi</h3>
+        <h3>Projeler Yönetimi</h3>
         <button class="btn btn-success" @onclick='() => NavigationManager.NavigateTo("/admin/projects/add")'>
             + Yeni Proje Ekle
         </button>
@@ -16,21 +16,21 @@
 
     @if (projects == null)
     {
-        <p><em>Projeler yÃ¼kleniyor...</em></p>
+        <p><em>Projeler yükleniyor...</em></p>
     }
     else if (!projects.Any())
     {
-        <div class="alert alert-info">HenÃ¼z hiÃ§ proje eklenmemiÅŸ.</div>
+        <div class="alert alert-info">Henüz hiç proje eklenmemiþ.</div>
     }
     else
     {
         <table class="table table-striped table-hover mt-3 shadow-sm">
             <thead class="table-dark">
                 <tr>
-                    <th>Proje AdÄ±</th>
-                    <th>Ã–zet</th>
+                    <th>Proje Adý</th>
+                    <th>Özet</th>
                     <th>Etiketler</th>
-                    <th>Ä°ÅŸlemler</th>
+                    <th>Ýþlemler</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +41,7 @@
                         <td>@project.Summary</td>
                         <td><span class="badge bg-secondary">@project.Tags</span></td>
                         <td>
-                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/projects/edit/{project.Id}")'>DÃ¼zenle</button>
+                            <button class="btn btn-sm btn-warning" @onclick='() => NavigationManager.NavigateTo($"/admin/projects/edit/{project.Id}")'>Düzenle</button>
                             <button class="btn btn-sm btn-danger" @onclick="() => DeleteProject(project.Id)">Sil</button>
                         </td>
                     </tr>
@@ -66,11 +66,11 @@
 
     private async Task DeleteProject(int id)
     {
-        // GerÃ§ek bir projede buraya "Emin misiniz?" pop-up'Ä± konur ama ÅŸimdilik direkt siliyoruz :)
+        // Gerçek bir projede buraya "Emin misiniz?" pop-up'ý konur ama þimdilik direkt siliyoruz :)
         var isSuccess = await ProjectService.DeleteProjectAsync(id);
         if (isSuccess)
         {
-            // Silme baÅŸarÄ±lÄ±ysa listeyi yenile
+            // Silme baþarýlýysa listeyi yenile
             await LoadProjects();
         }
     }

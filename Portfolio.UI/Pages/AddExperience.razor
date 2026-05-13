@@ -1,4 +1,4 @@
-ï»¿@page "/admin/experiences/add"
+@page "/admin/experiences/add"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -9,38 +9,38 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm border-success">
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-success ">
                     <h4 class="mb-0">Yeni Deneyim Ekle</h4>
                 </div>
                 <div class="card-body">
 
                     <div class="mb-3">
-                        <label class="form-label">Pozisyon / Ãœnvan</label>
-                        <input type="text" class="form-control" @bind="newExperience.Title" placeholder="Ã–rn: YazÄ±lÄ±m GeliÅŸtirici, Kurucu" />
+                        <label class="form-label">Pozisyon / Ünvan</label>
+                        <input type="text" class="form-control" @bind="newExperience.Title" placeholder="Örn: Yazýlým Geliþtirici, Kurucu" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Åžirket / Kurum</label>
-                        <input type="text" class="form-control" @bind="newExperience.Company" placeholder="Ã–rn: YAE3D" />
+                        <label class="form-label">Þirket / Kurum</label>
+                        <input type="text" class="form-control" @bind="newExperience.Company" placeholder="Örn: YAE3D" />
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Konum</label>
-                        <input type="text" class="form-control" @bind="newExperience.Location" placeholder="Ã–rn: Konya, Ä°stanbul, Uzaktan" />
+                        <input type="text" class="form-control" @bind="newExperience.Location" placeholder="Örn: Konya, Ýstanbul, Uzaktan" />
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">AÃ§Ä±klama (Ne yaptÄ±n?)</label>
-                        <textarea class="form-control" rows="4" @bind="newExperience.Description" placeholder="Ã–rn: .NET Core ile Ar-Ge projeleri geliÅŸtirdim..."></textarea>
+                        <label class="form-label">Açýklama (Ne yaptýn?)</label>
+                        <textarea class="form-control" rows="4" @bind="newExperience.Description" placeholder="Örn: .NET Core ile Ar-Ge projeleri geliþtirdim..."></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">BaÅŸlangÄ±Ã§ Tarihi</label>
+                            <label class="form-label">Baþlangýç Tarihi</label>
                             <input type="date" class="form-control" @bind="newExperience.StartDate" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">BitiÅŸ Tarihi</label>
+                            <label class="form-label">Bitiþ Tarihi</label>
                             <input type="date" class="form-control" @bind="newExperience.EndDate" disabled="@newExperience.IsCurrent" />
                         </div>
                     </div>
@@ -48,12 +48,12 @@
                     <div class="form-check mb-4">
                         <input class="form-check-input" type="checkbox" id="isCurrentCheck" @bind="newExperience.IsCurrent">
                         <label class="form-check-label" for="isCurrentCheck">
-                            Bu pozisyonda hala Ã§alÄ±ÅŸÄ±yorum
+                            Bu pozisyonda hala çalýþýyorum
                         </label>
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/experiences")'>Ä°ptal</button>
+                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/experiences")'>Ýptal</button>
                         <button class="btn btn-success" @onclick="HandleSave">Kaydet</button>
                     </div>
 
@@ -66,13 +66,13 @@
 @code {
     private CreateExperienceDto newExperience = new CreateExperienceDto
     {
-        StartDate = DateTime.Now, // VarsayÄ±lan olarak bugÃ¼nÃ¼ seÃ§sin
+        StartDate = DateTime.Now, // Varsayýlan olarak bugünü seçsin
         IsCurrent = false
     };
 
     private async Task HandleSave()
     {
-        // EÄŸer "Devam Ediyor" seÃ§iliyse, bitiÅŸ tarihini null yapÄ±p veritabanÄ±nÄ± temiz tutuyoruz
+        // Eðer "Devam Ediyor" seçiliyse, bitiþ tarihini null yapýp veritabanýný temiz tutuyoruz
         if (newExperience.IsCurrent)
         {
             newExperience.EndDate = null;

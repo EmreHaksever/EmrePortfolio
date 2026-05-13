@@ -1,4 +1,4 @@
-﻿@page "/admin/profile"
+@page "/admin/profile"
 @attribute [Authorize]
 @using Portfolio.UI.Models
 @using Portfolio.UI.Services
@@ -7,7 +7,7 @@
 
 <div class="container mt-4">
     <div class="card shadow-sm border-primary">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-primary ">
             <h4 class="mb-0">Profil Bilgilerini Yönet</h4>
         </div>
         <div class="card-body">
@@ -77,22 +77,44 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // Backend'den profil verisini çekiyoruz
-        profile = await ProfileService.GetProfileAsync();
+        try
+        {
+            // Backend'den profil verisini çekiyoruz
+            profile = await ProfileService.GetProfileAsync();
+        }
+        catch
+        {
+            // Eğer 404 vs atarsa yoksay, aşağıda null check var
+        }
+
+        if (profile == null)
+        {
+            profile = new ProfileInfoDto(); // Eğer db boşsa yeni obje oluştur
+        }
     }
 
     private async Task HandleUpdate()
     {
-        // Güncelleme isteği gönderiyoruz
-        var success = await ProfileService.UpdateProfileAsync(profile);
-
-        if (success)
+        bool success;
+        
+        if (profile.Id == 0)
         {
-            await JsRuntime.InvokeVoidAsync("alert", "Profil bilgileriniz başarıyla güncellendi!");
+            // Yeni oluştur
+            success = await ProfileService.CreateProfileAsync(profile);
         }
         else
         {
-            await JsRuntime.InvokeVoidAsync("alert", "Hata: Bilgiler güncellenemedi. Lütfen alanları kontrol edin.");
+            // Güncelleme isteği gönderiyoruz
+            success = await ProfileService.UpdateProfileAsync(profile);
+        }
+
+        if (success)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Profil bilgileriniz başarıyla kaydedildi!");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Hata: Bilgiler kaydedilemedi. Lütfen alanları kontrol edin.");
         }
     }
 }
