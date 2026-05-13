@@ -1,0 +1,49 @@
+﻿@page "/projects"
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ProjectService ProjectService
+
+<div class="container py-5">
+    <h2 class="fw-bold mb-4 text-uppercase">Projelerim</h2>
+    <div class="row">
+        @if (projects == null)
+        {
+            <div class="text-center"><div class="spinner-border"></div></div>
+        }
+        else
+        {
+            @foreach (var project in projects)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        <div class="card-body">
+                            @* İsimleri Entity'deki gibi güncelledik *@
+                            <h5 class="card-title fw-bold text-primary">@project.Name</h5>
+                            <p class="card-text">@project.Summary</p>
+
+                            @* Etiketleri (Tags) parçalayıp görselleştirelim *@
+                            @if (!string.IsNullOrEmpty(project.Tags))
+                            {
+                                <div class="mt-2">
+                                    @foreach (var tag in project.Tags.Split(','))
+                                    {
+                                        <span class="badge bg-light text-dark border me-1">@tag.Trim()</span>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pb-3">
+                            @* URL senin Entity'de yokmuş, istersen detaya yönlendirebiliriz veya kaldırabiliriz *@
+                            <button class="btn btn-sm btn-outline-primary">Detayları Gör</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<ProjectDto> projects;
+    protected override async Task OnInitializedAsync() => projects = await ProjectService.GetAllProjectsAsync();
+}

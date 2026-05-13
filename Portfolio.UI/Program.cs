@@ -30,5 +30,6 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>
 builder.Services.AddScoped<ExperienceService>();
 builder.Services.AddScoped<SkillService>();
 builder.Services.AddScoped<ProfileService>();
+builder.Services.AddScoped<MessageService>();
 
 await builder.Build().RunAsync();

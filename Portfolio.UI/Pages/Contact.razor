@@ -1,0 +1,47 @@
+﻿@page "/contact"
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject MessageService MessageService
+@inject IJSRuntime Js
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4">
+                <h2 class="fw-bold mb-4 text-center">İletişime Geç</h2>
+                <EditForm Model="messageModel" OnValidSubmit="HandleMessage">
+                    <div class="mb-3">
+                        <label class="form-label">Ad Soyad</label>
+                        <InputText class="form-control" @bind-Value="messageModel.FullName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">E-posta</label>
+                        <InputText class="form-control" @bind-Value="messageModel.Email" type="email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Konu</label>
+                        <InputText class="form-control" @bind-Value="messageModel.Subject" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mesajınız</label>
+                        <InputTextArea class="form-control" @bind-Value="messageModel.Content" rows="4" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2">Gönder</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateMessageDto messageModel = new();
+    private async Task HandleMessage()
+    {
+        var success = await MessageService.CreateMessageAsync(messageModel);
+        if (success)
+        {
+            await Js.InvokeVoidAsync("alert", "Mesajınız başarıyla iletildi!");
+            messageModel = new(); // Formu sıfırla
+        }
+    }
+}

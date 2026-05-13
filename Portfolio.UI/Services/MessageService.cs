@@ -6,23 +6,32 @@ namespace Portfolio.UI.Services;
 public class MessageService
 {
     private readonly HttpClient _httpClient;
-    public MessageService(HttpClient httpClient) => _httpClient = httpClient;
 
+    public MessageService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
+    }
+
+    // Admin panelinde mesajları listelemek için kullandığımız metot
     public async Task<List<MessageDto>> GetAllMessagesAsync()
     {
         return await _httpClient.GetFromJsonAsync<List<MessageDto>>("api/messages");
     }
 
-    public async Task<bool> DeleteMessageAsync(int id)
+    // İŞTE EKSİK OLAN VE HATAYA SEBEP OLAN METOT:
+    public async Task<bool> CreateMessageAsync(CreateMessageDto messageDto)
     {
-        var response = await _httpClient.DeleteAsync($"api/messages/{id}");
+        // Backend'deki MessagesController'ın [HttpPost] metoduna veriyi gönderiyoruz
+        var response = await _httpClient.PostAsJsonAsync("api/messages", messageDto);
+
+        // Eğer HTTP 200 veya 201 döndüyse true, aksi halde false döner
         return response.IsSuccessStatusCode;
     }
 
-    // Mesajı okundu olarak işaretlemek için (Opsiyonel)
-    public async Task<bool> MarkAsReadAsync(int id)
+    // Mesaj silme metodu
+    public async Task<bool> DeleteMessageAsync(int id)
     {
-        var response = await _httpClient.PostAsync($"api/messages/mark-as-read/{id}", null);
+        var response = await _httpClient.DeleteAsync($"api/messages/{id}");
         return response.IsSuccessStatusCode;
     }
 }

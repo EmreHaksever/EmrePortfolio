@@ -1,0 +1,39 @@
+﻿@page "/"
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ProfileService ProfileService
+
+@if (profile == null)
+{
+    <div class="d-flex justify-content-center mt-5"><div class="spinner-border text-primary"></div></div>
+}
+else
+{
+    <div class="hero-section bg-light py-5 border-bottom">
+        <div class="container text-center py-5">
+            <h1 class="display-4 fw-bold text-dark">Merhaba, Ben @profile.FullName</h1>
+            <p class="lead text-muted mb-4">@profile.Title</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="/projects" class="btn btn-primary btn-lg px-4 gap-3">Projelerimi İncele</a>
+                <a href="/contact" class="btn btn-outline-secondary btn-lg px-4">Bana Ulaş</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bold">Kısa Bir Özet</h2>
+                <p class="fs-5 text-muted">@profile.Summary</p>
+                <div class="mt-4">
+                    <span class="badge rounded-pill bg-success p-3">Akademik Ortalama: @profile.Gpa / 4.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private ProfileInfoDto profile;
+    protected override async Task OnInitializedAsync() => profile = await ProfileService.GetProfileAsync();
+}
