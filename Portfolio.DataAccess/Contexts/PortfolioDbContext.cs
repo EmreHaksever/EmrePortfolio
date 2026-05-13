@@ -1,28 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portfolio.Domain.Entities;
 
+
 namespace Portfolio.DataAccess.Contexts;
 
+// Sınıfın public olduğundan emin oluyoruz (Erişilebilirlik hatasını önlemek için)
 public class PortfolioDbContext : DbContext
 {
-    // API katmanından gönderilecek bağlantı ayarlarını (Connection String) içeri alıyoruz
     public PortfolioDbContext(DbContextOptions<PortfolioDbContext> options) : base(options)
     {
     }
 
-    // Veritabanında oluşacak tablolarımız
+    // Veritabanı tabloları
     public DbSet<AppUser> AppUsers { get; set; }
     public DbSet<ProfileInfo> ProfileInfos { get; set; }
     public DbSet<Experience> Experiences { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<Skill> Skills { get; set; }
+    public DbSet<Message> Messages { get; set; } // Bu satırın burada olması şart
 
-    // Eğer tablolar oluşurken özel kısıtlamalar (max uzunluk vs.) yapmak istersek burayı kullanırız
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        // Örnek: Hakkında yazısı uzun olabilir, karakter sınırını kaldıralım
+        // Summary alanı için yaptığımızın aynısını GPA için yapıyoruz
+        modelBuilder.Entity<ProfileInfo>()
+            .Property(p => p.Gpa)
+            .HasColumnType("decimal(3,2)"); // Toplam 3 basamak, virgülden sonra 2 basamak (Örn: 4.00)
+
         modelBuilder.Entity<ProfileInfo>()
             .Property(p => p.Summary)
             .HasColumnType("nvarchar(max)");

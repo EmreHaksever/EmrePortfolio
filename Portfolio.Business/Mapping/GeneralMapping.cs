@@ -26,6 +26,17 @@ public class GeneralMapping : Profile
         CreateMap<ProfileInfo, CreateProfileInfoDto>().ReverseMap();
         CreateMap<ProfileInfo, UpdateProfileInfoDto>().ReverseMap();
 
+        // 1. GET METODU İÇİN (Veritabanından -> UI'a)
+        // Message Entity'sini al, MessageDto'ya dönüştür.
+        CreateMap<Message, MessageDto>();
+
+        // 2. POST METODU İÇİN (Ziyaretçiden -> Veritabanına)
+        // CreateMessageDto'yu al, Message Entity'sine dönüştür.
+        CreateMap<CreateMessageDto, Message>();
+
+        // 3. OPSİYONEL: DTO'dan Entity'ye dönüş (Gerekirse)
+        CreateMap<MessageDto, Message>();
+
 
     }
 }

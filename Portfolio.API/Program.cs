@@ -28,6 +28,7 @@ builder.Services.AddScoped<IProjectService, ProjectManager>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddScoped<ISkillService, SkillManager>();
 builder.Services.AddScoped<IProfileInfoService, ProfileInfoManager>();
+builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
