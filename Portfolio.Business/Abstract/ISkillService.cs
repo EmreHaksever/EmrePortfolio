@@ -5,7 +5,9 @@ namespace Portfolio.Business.Abstract;
 public interface ISkillService
 {
     Task<List<SkillDto>> GetAllSkillsAsync();
+    Task<SkillDto> GetSkillByIdAsync(int id);
     Task AddSkillAsync(CreateSkillDto createSkillDto);
     Task UpdateSkillAsync(UpdateSkillDto updateSkillDto); // Yeni
     Task DeleteSkillAsync(int id); // Yeni
+
 }

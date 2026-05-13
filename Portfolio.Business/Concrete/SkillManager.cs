@@ -24,6 +24,17 @@ public class SkillManager : ISkillService
         return _mapper.Map<List<SkillDto>>(skills);
     }
 
+    public async Task<SkillDto> GetSkillByIdAsync(int id)
+    {
+        var skill = await _context.Skills.FindAsync(id);
+
+        if (skill == null)
+        {
+            return null;
+        }
+
+        return _mapper.Map<SkillDto>(skill);
+    }
     public async Task AddSkillAsync(CreateSkillDto createSkillDto)
     {
         var skill = _mapper.Map<Skill>(createSkillDto);

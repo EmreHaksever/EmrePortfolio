@@ -23,6 +23,18 @@ public class SkillsController : ControllerBase
         return Ok(skills);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSkillById(int id)
+    {
+        var skill = await _skillService.GetSkillByIdAsync(id);
+
+        if (skill == null)
+        {
+            return NotFound("Yetenek bulunamadı.");
+        }
+
+        return Ok(skill);
+    }
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> AddSkill([FromBody] CreateSkillDto createSkillDto)
