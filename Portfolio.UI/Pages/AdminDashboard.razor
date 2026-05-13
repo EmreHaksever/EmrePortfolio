@@ -20,7 +20,7 @@
     </div>
 
     <div class="row mt-4">
-
+        @* PROJELER *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-primary h-100">
                 <div class="card-body text-center d-flex flex-column">
@@ -31,6 +31,7 @@
             </div>
         </div>
 
+        @* DENEYİMLER *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-success h-100">
                 <div class="card-body text-center d-flex flex-column">
@@ -40,12 +41,25 @@
                 </div>
             </div>
         </div>
+
+        @* YETENEKLER *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-info h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-info">Yetenekler</h5>
                     <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yönet.</p>
                     <button class="btn btn-info text-white mt-auto" @onclick="GoToSkills">Yetenekleri Yönet</button>
+                </div>
+            </div>
+        </div>
+
+        @* PROFİL AYARLARI *@
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-warning h-100">
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title text-warning">Profil Ayarları</h5>
+                    <p class="card-text flex-grow-1">Kişisel bilgilerini, sosyal medya linklerini ve biyografini düzenle.</p>
+                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili Düzenle</button>
                 </div>
             </div>
         </div>
@@ -68,8 +82,14 @@
     {
         NavigationManager.NavigateTo("/admin/experiences");
     }
+
     private void GoToSkills()
     {
         NavigationManager.NavigateTo("/admin/skills");
+    }
+
+    private void GoToProfile()
+    {
+        NavigationManager.NavigateTo("/admin/profile");
     }
 }

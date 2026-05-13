@@ -30,4 +30,12 @@ public class ProfileInfosController : ControllerBase
         await _profileInfoService.AddProfileInfoAsync(createProfileInfoDto);
         return Ok(new { message = "Profil bilgisi başarıyla eklendi." });
     }
+
+    [HttpPut]
+    [Authorize]
+    public async Task<IActionResult> UpdateProfileInfo([FromBody] ProfileInfoDto updateProfileInfoDto)
+    {
+        await _profileInfoService.UpdateProfileInfoAsync(updateProfileInfoDto);
+        return Ok(new { message = "Profil bilgileri başarıyla güncellendi." });
+    }
 }

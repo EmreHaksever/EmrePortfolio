@@ -1,0 +1,98 @@
+﻿@page "/admin/profile"
+@attribute [Authorize]
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ProfileService ProfileService
+@inject IJSRuntime JsRuntime
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Profil Bilgilerini Yönet</h4>
+        </div>
+        <div class="card-body">
+            @if (profile == null)
+            {
+                <div class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2">Profil bilgileri yükleniyor...</p>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    @* İsim ve Ünvan *@
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label font-weight-bold">Ad Soyad</label>
+                        <input type="text" class="form-control" @bind="profile.FullName" placeholder="Örn: Emre Haksever" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label font-weight-bold">Ünvan (Title)</label>
+                        <input type="text" class="form-control" @bind="profile.Title" placeholder="Örn: Bilgisayar Mühendisliği Öğrencisi" />
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label class="form-label font-weight-bold">Ortalama (GPA)</label>
+                        <input type="number" step="0.01" class="form-control" @bind="profile.Gpa" />
+                    </div>
+
+                    @* Özet Bilgi (Summary) *@
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label font-weight-bold">Profil Özeti (Summary)</label>
+                        <textarea class="form-control" rows="5" @bind="profile.Summary" placeholder="Kendinizden kısaca bahsedin..."></textarea>
+                    </div>
+
+                    @* İletişim Bilgileri *@
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label font-weight-bold">E-posta</label>
+                        <input type="email" class="form-control" @bind="profile.Email" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label font-weight-bold">Telefon</label>
+                        <input type="text" class="form-control" @bind="profile.Phone" />
+                    </div>
+
+                    @* Sosyal Medya Linkleri *@
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label font-weight-bold">GitHub URL</label>
+                        <input type="text" class="form-control" @bind="profile.GithubUrl" placeholder="https://github.com/kullaniciadi" />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label font-weight-bold">LinkedIn URL</label>
+                        <input type="text" class="form-control" @bind="profile.LinkedInUrl" placeholder="https://linkedin.com/in/kullaniciadi" />
+                    </div>
+                </div>
+
+                <div class="text-end mt-4">
+                    <button class="btn btn-primary px-5 shadow-sm" @onclick="HandleUpdate">
+                        <i class="bi bi-save"></i> Bilgileri Güncelle
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private ProfileInfoDto profile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Backend'den profil verisini çekiyoruz
+        profile = await ProfileService.GetProfileAsync();
+    }
+
+    private async Task HandleUpdate()
+    {
+        // Güncelleme isteği gönderiyoruz
+        var success = await ProfileService.UpdateProfileAsync(profile);
+
+        if (success)
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Profil bilgileriniz başarıyla güncellendi!");
+        }
+        else
+        {
+            await JsRuntime.InvokeVoidAsync("alert", "Hata: Bilgiler güncellenemedi. Lütfen alanları kontrol edin.");
+        }
+    }
+}

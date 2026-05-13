@@ -18,10 +18,17 @@ public class ProfileInfoManager : IProfileInfoService
         _mapper = mapper;
     }
 
-    public async Task<List<ProfileInfoDto>> GetProfileInfoAsync()
+    public async Task<ProfileInfoDto> GetProfileInfoAsync()
     {
-        var profileInfo = await _context.ProfileInfos.ToListAsync();
-        return _mapper.Map<List<ProfileInfoDto>>(profileInfo);
+        var profile = await _context.ProfileInfos.FirstOrDefaultAsync();
+        return _mapper.Map<ProfileInfoDto>(profile);
+    }
+
+    public async Task UpdateProfileInfoAsync(ProfileInfoDto updateProfileInfoDto)
+    {
+        var profile = _mapper.Map<ProfileInfo>(updateProfileInfoDto);
+        _context.ProfileInfos.Update(profile);
+        await _context.SaveChangesAsync();
     }
 
     public async Task AddProfileInfoAsync(CreateProfileInfoDto createProfileInfoDto)
