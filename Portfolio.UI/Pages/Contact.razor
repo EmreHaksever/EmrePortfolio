@@ -22,85 +22,113 @@
     }
     else
     {
-        <div class="row g-5">
-            <!-- Contact Info -->
-            <div class="col-lg-5">
+    <div class="mx-auto mt-4 shadow-lg border-0 rounded-4 overflow-hidden bg-white d-flex flex-column flex-lg-row" style="max-width: 1100px; min-height: 650px;">
+        <!-- Left Side: Contact Info -->
+        <div class="p-4 p-md-5 text-white position-relative overflow-hidden d-flex flex-column" style="flex: 0 0 40%; background: linear-gradient(135deg, var(--accent-primary) 0%, #0369a1 100%); min-width: 350px;">
+            <!-- Decorative background elements -->
+            <div class="position-absolute" style="top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+            <div class="position-absolute" style="bottom: 20%; left: -30px; width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+
+            <div class="position-relative z-1">
+                <h3 class="fw-bold mb-4">İletişim Bilgileri</h3>
+                <p class="mb-5 opacity-75">Formu doldurarak bana mesaj gönderebilir veya aşağıdaki kanallar üzerinden doğrudan ulaşabilirsiniz.</p>
+
                 <div class="d-flex flex-column gap-4">
-                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
-                        <div class="p-3 rounded-circle" style="background: rgba(14, 165, 233, 0.1);">
-                            <i class="bi bi-envelope-fill fs-3" style="color: var(--accent-primary);"></i>
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-envelope-fill fs-5"></i>
                         </div>
-                        <div class="ms-4">
-                            <h5 class=" mb-1">E-posta</h5>
-                            <a href="mailto:@profile.Email" class="text-secondary text-decoration-none hover-text-primary">@profile.Email</a>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
-                        <div class="p-3 rounded-circle" style="background: rgba(16, 185, 129, 0.1);">
-                            <i class="bi bi-telephone-fill fs-3" style="color: var(--accent-secondary);"></i>
-                        </div>
-                        <div class="ms-4">
-                            <h5 class=" mb-1">Telefon</h5>
-                            <a href="tel:@profile.Phone" class="text-secondary text-decoration-none">@profile.Phone</a>
+                        <div>
+                            <div class="small opacity-75">E-posta</div>
+                            <a href="mailto:@profile.Email" class="text-white text-decoration-none fw-medium">@profile.Email</a>
                         </div>
                     </div>
 
-                    <div class="glass-panel p-4 d-flex align-items-center hover-card">
-                        <div class="p-3 rounded-circle" style="background: rgba(139, 92, 246, 0.1);">
-                            <i class="bi bi-geo-alt-fill fs-3" style="color: var(--accent-purple);"></i>
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-telephone-fill fs-5"></i>
                         </div>
-                        <div class="ms-4">
-                            <h5 class=" mb-1">Konum</h5>
-                            <span class="text-secondary">Türkiye</span>
+                        <div>
+                            <div class="small opacity-75">Telefon</div>
+                            <a href="tel:@profile.Phone" class="text-white text-decoration-none fw-medium">@profile.Phone</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                            <i class="bi bi-geo-alt-fill fs-5"></i>
+                        </div>
+                        <div>
+                            <div class="small opacity-75">Konum</div>
+                            <div class="fw-medium">Türkiye</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Contact Form -->
-            <div class="col-lg-7">
-                <div class="glass-panel p-4 p-md-5">
-                    <h3 class="fw-bold  mb-4">Mesaj Gönder</h3>
-                    
-                    @if (isSuccess)
-                    {
-                        <div class="alert alert-success glass-panel  border-0" role="alert">
-                            <i class="bi bi-check-circle-fill me-2" style="color: var(--accent-secondary);"></i>
-                            Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağım!
-                        </div>
-                    }
-
-                    <EditForm Model="message" OnValidSubmit="HandleValidSubmit">
-                        <DataAnnotationsValidator />
-                        
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary">Ad Soyad</label>
-                                <InputText @bind-Value="message.FullName" class="form-control" placeholder="Adınız Soyadınız" required />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label text-secondary">E-posta</label>
-                                <InputText @bind-Value="message.Email" class="form-control" type="email" placeholder="ornek@mail.com" required />
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label text-secondary">Konu</label>
-                                <InputText @bind-Value="message.Subject" class="form-control" placeholder="Mesajınızın konusu" required />
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label text-secondary">Mesaj</label>
-                                <InputTextArea @bind-Value="message.Content" class="form-control" rows="5" placeholder="Mesajınız..." required></InputTextArea>
-                            </div>
-                            <div class="col-12 mt-4">
-                                <button type="submit" class="btn btn-primary w-100 d-flex justify-content-center align-items-center gap-2">
-                                    <i class="bi bi-send"></i> Gönder
-                                </button>
-                            </div>
-                        </div>
-                    </EditForm>
+                <div class="mt-auto pt-5">
+                    <h6 class="small fw-bold text-uppercase tracking-wider opacity-50 mb-3">Sosyal Medya</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-linkedin text-primary"></i></a>
+                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-github text-dark"></i></a>
+                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-instagram text-danger"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="p-4 p-md-5 bg-white flex-grow-1">
+            @if (isSuccess)
+            {
+                <div class="alert alert-success border-0 shadow-sm rounded-3 py-3 mb-4 d-flex align-items-center" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
+                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                    <div>
+                        <div class="fw-bold">Harika!</div>
+                        <div class="small">Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağım.</div>
+                    </div>
+                </div>
+            }
+
+            <h3 class="fw-bold mb-4" style="color: var(--text-primary);">Mesaj Gönderin</h3>
+            
+            <EditForm Model="message" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Ad Soyad</label>
+                        <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
+                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-person"></i></span>
+                            <InputText @bind-Value="message.FullName" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Adınız Soyadınız" required style="box-shadow: none;" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">E-posta</label>
+                        <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
+                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-envelope"></i></span>
+                            <InputText @bind-Value="message.Email" class="form-control border-0 bg-transparent py-2 ps-0" type="email" placeholder="ornek@mail.com" required style="box-shadow: none;" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Konu</label>
+                        <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
+                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-chat-left-dots"></i></span>
+                            <InputText @bind-Value="message.Subject" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Mesajınızın konusu" required style="box-shadow: none;" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Mesajınız</label>
+                        <InputTextArea @bind-Value="message.Content" class="form-control bg-light border-0 rounded-3 py-3 shadow-sm" rows="6" placeholder="Size nasıl yardımcı olabilirim?" required style="box-shadow: none;"></InputTextArea>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm d-flex align-items-center justify-content-center gap-2 hover-scale transition-all" style="background: linear-gradient(to right, var(--accent-primary), #0284c7);">
+                            <i class="bi bi-send-fill"></i> Mesajı İlet
+                        </button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
     }
 </div>
 
