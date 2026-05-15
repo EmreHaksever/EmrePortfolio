@@ -35,7 +35,7 @@
                         <div class="timeline-item glass-panel p-4 hover-card">
                             <div class="timeline-dot"></div>
                             <div class="timeline-date">
-                                <i class="bi bi-calendar3 me-2"></i> @exp.StartDate - @exp.EndDate
+                                <i class="bi bi-calendar3 me-2"></i> @exp.StartDate.ToString("dd.MM.yyyy") - @(exp.EndDate?.ToString("dd.MM.yyyy") ?? "Halen")
                             </div>
                             <h3 class="h4 fw-bold  mt-2">@exp.Title</h3>
                             <div class="d-flex align-items-center gap-3 mb-3 text-secondary">
