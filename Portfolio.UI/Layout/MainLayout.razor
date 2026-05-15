@@ -39,14 +39,29 @@
         @Body
     </main>
 
+@using Portfolio.UI.Models
+@using Portfolio.UI.Services
+@inject ProfileService ProfileService
+
     <footer class="py-4 text-center" style="border-top: 1px solid var(--glass-border); background: var(--bg-secondary);">
         <div class="container">
             <div class="d-flex justify-content-center gap-3 mb-3">
-                <a href="#" class=" fs-4 hover-card"><i class="bi bi-github"></i></a>
-                <a href="#" class=" fs-4 hover-card"><i class="bi bi-linkedin"></i></a>
-                <a href="#" class=" fs-4 hover-card"><i class="bi bi-twitter-x"></i></a>
+                @if (profile != null)
+                {
+                    <a href="@(profile.GithubUrl?.StartsWith("http") == true ? profile.GithubUrl : $"https://{profile.GithubUrl}")" target="_blank" class="text-dark fs-4 hover-card"><i class="bi bi-github"></i></a>
+                    <a href="@(profile.LinkedInUrl?.StartsWith("http") == true ? profile.LinkedInUrl : $"https://{profile.LinkedInUrl}")" target="_blank" class="text-primary fs-4 hover-card"><i class="bi bi-linkedin"></i></a>
+                }
             </div>
             <p class="text-secondary mb-0">&copy; @DateTime.Now.Year Emre Haksever. Tüm Hakları Saklıdır.</p>
         </div>
     </footer>
 </div>
+
+@code {
+    private ProfileInfoDto profile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        profile = await ProfileService.GetProfileAsync();
+    }
+}

@@ -65,14 +65,13 @@
                     </div>
                 </div>
 
-                <div class="mt-auto pt-5">
-                    <h6 class="small fw-bold text-uppercase tracking-wider opacity-50 mb-3">Sosyal Medya</h6>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-linkedin text-primary"></i></a>
-                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-github text-dark"></i></a>
-                        <a href="#" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-instagram text-danger"></i></a>
-                    </div>
-                </div>
+                            <div class="mt-auto pt-5">
+                                <h6 class="small fw-bold text-uppercase tracking-wider opacity-50 mb-3">Sosyal Medya</h6>
+                                <div class="d-flex gap-3">
+                                    <a href="@(profile.LinkedInUrl?.StartsWith("http") == true ? profile.LinkedInUrl : $"https://{profile.LinkedInUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-linkedin text-primary"></i></a>
+                                    <a href="@(profile.GithubUrl?.StartsWith("http") == true ? profile.GithubUrl : $"https://{profile.GithubUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-github text-dark"></i></a>
+                                </div>
+                            </div>
             </div>
         </div>
 

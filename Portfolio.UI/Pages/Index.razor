@@ -63,10 +63,9 @@
             </div>
         </div>
 
-        <!-- Quick Stats or Links -->
         <div class="row mt-5 g-4">
             <div class="col-md-4">
-                <a href="@profile.GithubUrl" target="_blank" class="text-decoration-none">
+                <a href="@(profile.GithubUrl?.StartsWith("http") == true ? profile.GithubUrl : $"https://{profile.GithubUrl}")" target="_blank" class="text-decoration-none">
                     <div class="glass-panel p-4 text-center hover-card">
                         <i class="bi bi-github fs-1  mb-3"></i>
                         <h4 class="">GitHub</h4>
@@ -75,7 +74,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a href="@profile.LinkedInUrl" target="_blank" class="text-decoration-none">
+                <a href="@(profile.LinkedInUrl?.StartsWith("http") == true ? profile.LinkedInUrl : $"https://{profile.LinkedInUrl}")" target="_blank" class="text-decoration-none">
                     <div class="glass-panel p-4 text-center hover-card">
                         <i class="bi bi-linkedin fs-1  mb-3" style="color: #0a66c2 !important;"></i>
                         <h4 class="">LinkedIn</h4>
