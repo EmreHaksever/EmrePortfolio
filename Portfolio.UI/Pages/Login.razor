@@ -4,29 +4,62 @@
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h3 class="text-center mb-4">Admin Giriþi</h3>
+<div class="vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="background-color: #f8fafc; margin-top: -80px;">
+    <!-- Background Decorators -->
+    <div class="position-absolute" style="top: -100px; left: -100px; width: 300px; height: 300px; background: rgba(14, 165, 233, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+    <div class="position-absolute" style="bottom: -100px; right: -100px; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.1); filter: blur(80px); border-radius: 50%;"></div>
 
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="text-center mb-4">
+                    <div class="d-inline-flex p-3 rounded-circle bg-white shadow-sm mb-3">
+                        <img src="images/logo.png" alt="EH Logo" style="height: 50px; width: auto; mix-blend-mode: multiply;" />
+                    </div>
+                    <h2 class="fw-bold text-dark mb-1">HoÅŸ Geldiniz</h2>
+                    <p class="text-secondary small">LÃ¼tfen yÃ¶netici bilgilerinizi giriniz</p>
+                </div>
+
+                <div class="glass-panel p-4 p-md-5 shadow-lg border-0 rounded-4 bg-white">
                     @if (!string.IsNullOrEmpty(errorMessage))
                     {
-                        <div class="alert alert-danger">@errorMessage</div>
+                        <div class="alert alert-danger border-0 small py-2 d-flex align-items-center mb-4" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">
+                            <i class="bi bi-exclamation-circle-fill me-2"></i> @errorMessage
+                        </div>
                     }
 
                     <div class="mb-3">
-                        <label class="form-label">Kullanýcý Adý</label>
-                        <input type="text" class="form-control" @bind="loginModel.Username" />
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">KullanÄ±cÄ± AdÄ±</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-light" style="color: var(--accent-primary);">
+                                <i class="bi bi-person"></i>
+                            </span>
+                            <input type="text" class="form-control border-0 bg-light py-2 px-3" placeholder="KullanÄ±cÄ± adÄ±nÄ±z" @bind="loginModel.Username" />
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Þifre</label>
-                        <input type="password" class="form-control" @bind="loginModel.Password" />
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Åžifre</label>
+                        <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                            <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-primary);">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="@(showPassword ? "text" : "password")" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" @bind="loginModel.Password" style="box-shadow: none;" />
+                            <button class="btn border-0 bg-transparent px-3" type="button" @onclick="TogglePasswordVisibility" style="box-shadow: none;">
+                                <i class="bi @(showPassword ? "bi-eye-slash" : "bi-eye") text-secondary"></i>
+                            </button>
+                        </div>
                     </div>
 
-                    <button class="btn btn-primary w-100" @onclick="HandleLogin">Giriþ Yap</button>
+                    <button class="btn btn-primary w-100 py-2 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" @onclick="HandleLogin">
+                        <i class="bi bi-box-arrow-in-right"></i> GiriÅŸ Yap
+                    </button>
+                    
+                    <div class="text-center mt-4">
+                        <a href="/" class="text-secondary text-decoration-none small hover-text-primary transition-all">
+                            <i class="bi bi-arrow-left me-1"></i> Siteye Geri DÃ¶n
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -36,21 +69,26 @@
 @code {
     private LoginDto loginModel = new LoginDto();
     private string errorMessage = "";
+    private bool showPassword = false;
+
+    private void TogglePasswordVisibility()
+    {
+        showPassword = !showPassword;
+    }
 
     private async Task HandleLogin()
     {
-        errorMessage = ""; // Önceki hatalarý temizle
+        errorMessage = ""; 
 
         var isSuccess = await AuthService.LoginAsync(loginModel);
 
         if (isSuccess)
         {
-            // Baþarýlýysa Admin paneline yönlendir
             NavigationManager.NavigateTo("/admin");
         }
         else
         {
-            errorMessage = "Kullanýcý adý veya þifre hatalý!";
+            errorMessage = "KullanÄ±cÄ± adÄ± veya ÅŸifre hatalÄ±!";
         }
     }
 }

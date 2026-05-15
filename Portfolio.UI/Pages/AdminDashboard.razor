@@ -4,73 +4,99 @@
 @inject AuthService AuthService
 @inject NavigationManager NavigationManager
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-success">Admin Paneli</h2>
-        <button class="btn btn-outline-danger" @onclick="HandleLogout">
+<div class="container py-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 gap-3">
+        <div>
+            <div class="badge px-3 py-2 rounded-pill mb-2" style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2); color: var(--accent-primary);">
+                <i class="bi bi-shield-lock-fill me-1"></i> Kontrol Paneli
+            </div>
+            <h2 class="display-6 fw-bold mb-0" style="color: var(--text-primary);">Yönetim <span style="color: var(--accent-primary);">Merkezi</span></h2>
+            <p class="text-secondary mt-2 mb-0">Portfolyo içeriğinizi ve gelen mesajlarınızı buradan yönetebilirsiniz.</p>
+        </div>
+        <button class="btn btn-outline-danger d-flex align-items-center gap-2 px-4 py-2 rounded-3" @onclick="HandleLogout">
             <i class="bi bi-box-arrow-right"></i> Çıkış Yap
         </button>
     </div>
 
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yönetebilirsin.</p>
-            <hr />
-        </div>
-    </div>
-
-    <div class="row mt-4">
+    <div class="row g-4">
         @* PROJELER *@
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm border-primary h-100">
-                <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-primary">Projeler</h5>
-                    <p class="card-text flex-grow-1">Portfolyondaki projeleri ekle, sil veya güncelle.</p>
-                    <button class="btn btn-primary mt-auto" @onclick="GoToProjects">Projeleri Yönet</button>
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-panel p-4 h-100 d-flex flex-column hover-card position-relative overflow-hidden" style="cursor: pointer;" @onclick="GoToProjects">
+                <div class="position-absolute" style="top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(14, 165, 233, 0.2); filter: blur(40px); border-radius: 50%;"></div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <div class="p-3 rounded-3 me-3" style="background: rgba(14, 165, 233, 0.1);">
+                        <i class="bi bi-grid-fill fs-3" style="color: var(--accent-primary);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--text-primary);">Projeler</h4>
                 </div>
+                <p class="text-secondary flex-grow-1">Portfolyondaki projeleri ekle, mevcut olanları düzenle veya sil.</p>
+                <button class="btn btn-primary w-100 mt-2">Yönet</button>
             </div>
         </div>
 
         @* DENEYİMLER *@
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm border-success h-100">
-                <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-success">Deneyimler</h5>
-                    <p class="card-text flex-grow-1">Geçmiş iş, staj ve girişim tecrübelerini buradan yönet.</p>
-                    <button class="btn btn-success mt-auto" @onclick="GoToExperiences">Deneyim Yönetimi</button>
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-panel p-4 h-100 d-flex flex-column hover-card position-relative overflow-hidden" style="cursor: pointer;" @onclick="GoToExperiences">
+                <div class="position-absolute" style="top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(16, 185, 129, 0.2); filter: blur(40px); border-radius: 50%;"></div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <div class="p-3 rounded-3 me-3" style="background: rgba(16, 185, 129, 0.1);">
+                        <i class="bi bi-briefcase-fill fs-3" style="color: #10b981;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--text-primary);">Deneyimler</h4>
                 </div>
+                <p class="text-secondary flex-grow-1">Geçmiş iş, staj ve girişim tecrübelerini buradan yönet.</p>
+                <button class="btn w-100 mt-2 text-white" style="background-color: #10b981;">Yönet</button>
             </div>
         </div>
 
         @* YETENEKLER *@
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm border-info h-100">
-                <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-info">Yetenekler</h5>
-                    <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yönet.</p>
-                    <button class="btn btn-info  mt-auto" @onclick="GoToSkills">Yetenekleri Yönet</button>
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-panel p-4 h-100 d-flex flex-column hover-card position-relative overflow-hidden" style="cursor: pointer;" @onclick="GoToSkills">
+                <div class="position-absolute" style="top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(245, 158, 11, 0.2); filter: blur(40px); border-radius: 50%;"></div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <div class="p-3 rounded-3 me-3" style="background: rgba(245, 158, 11, 0.1);">
+                        <i class="bi bi-lightning-charge-fill fs-3" style="color: #f59e0b;"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--text-primary);">Yetenekler</h4>
                 </div>
+                <p class="text-secondary flex-grow-1">Teknik becerilerini, dillerini ve yetkinlik seviyelerini yönet.</p>
+                <button class="btn w-100 mt-2 text-white" style="background-color: #f59e0b;">Yönet</button>
             </div>
         </div>
 
         @* PROFİL AYARLARI *@
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm border-warning h-100">
-                <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-warning">Profil Ayarları</h5>
-                    <p class="card-text flex-grow-1">Kişisel bilgilerini, sosyal medya linklerini ve biyografini düzenle.</p>
-                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili Düzenle</button>
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-panel p-4 h-100 d-flex flex-column hover-card position-relative overflow-hidden" style="cursor: pointer;" @onclick="GoToProfile">
+                <div class="position-absolute" style="top: -30px; right: -30px; width: 100px; height: 100px; background: rgba(139, 92, 246, 0.2); filter: blur(40px); border-radius: 50%;"></div>
+                
+                <div class="d-flex align-items-center mb-3">
+                    <div class="p-3 rounded-3 me-3" style="background: rgba(139, 92, 246, 0.1);">
+                        <i class="bi bi-person-badge-fill fs-3" style="color: var(--accent-purple);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--text-primary);">Profil</h4>
                 </div>
+                <p class="text-secondary flex-grow-1">Kişisel bilgilerini, ünvanını ve sosyal ağ bağlantılarını düzenle.</p>
+                <button class="btn w-100 mt-2 text-white" style="background-color: var(--accent-purple);">Düzenle</button>
             </div>
         </div>
 
         @* GELEN MESAJLAR *@
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm border-secondary h-100">
-                <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-secondary">Gelen Mesajlar</h5>
-                    <p class="card-text flex-grow-1">İletişim formundan gelen mesajları görüntüle ve yönet.</p>
-                    <button class="btn btn-secondary mt-auto" @onclick="GoToMessages">Mesajları Oku</button>
+        <div class="col-md-6 col-lg-8">
+            <div class="glass-panel p-4 h-100 d-flex flex-column flex-sm-row align-items-sm-center hover-card position-relative overflow-hidden" style="cursor: pointer;" @onclick="GoToMessages">
+                <div class="position-absolute" style="top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(236, 72, 153, 0.15); filter: blur(50px); border-radius: 50%;"></div>
+                
+                <div class="p-4 rounded-3 me-sm-4 mb-3 mb-sm-0 text-center" style="background: rgba(236, 72, 153, 0.1);">
+                    <i class="bi bi-envelope-paper-heart-fill display-5" style="color: #ec4899;"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h3 class="fw-bold mb-2" style="color: var(--text-primary);">Gelen Mesajlar</h3>
+                    <p class="text-secondary mb-3">İletişim formundan gelen iş tekliflerini, tebrikleri ve mesajları oku.</p>
+                    <button class="btn px-4 text-white" style="background-color: #ec4899;">
+                        <i class="bi bi-inbox-fill me-2"></i> Gelen Kutusunu Aç
+                    </button>
                 </div>
             </div>
         </div>
