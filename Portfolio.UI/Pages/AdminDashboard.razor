@@ -8,13 +8,13 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-success">Admin Paneli</h2>
         <button class="btn btn-outline-danger" @onclick="HandleLogout">
-            <i class="bi bi-box-arrow-right"></i> Çýkýþ Yap
+            <i class="bi bi-box-arrow-right"></i> Ã‡Ä±kÄ±ÅŸ Yap
         </button>
     </div>
 
     <div class="row">
         <div class="col-md-12 text-center">
-            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yönetebilirsin.</p>
+            <p class="lead">Buradan projelerini, deneyimlerini ve yeteneklerini yÃ¶netebilirsin.</p>
             <hr />
         </div>
     </div>
@@ -25,19 +25,19 @@
             <div class="card shadow-sm border-primary h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-primary">Projeler</h5>
-                    <p class="card-text flex-grow-1">Portfolyondaki projeleri ekle, sil veya güncelle.</p>
-                    <button class="btn btn-primary mt-auto" @onclick="GoToProjects">Projeleri Yönet</button>
+                    <p class="card-text flex-grow-1">Portfolyondaki projeleri ekle, sil veya gÃ¼ncelle.</p>
+                    <button class="btn btn-primary mt-auto" @onclick="GoToProjects">Projeleri YÃ¶net</button>
                 </div>
             </div>
         </div>
 
-        @* DENEYÝMLER *@
+        @* DENEYÄ°MLER *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-success h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-success">Deneyimler</h5>
-                    <p class="card-text flex-grow-1">Geçmiþ iþ, staj ve giriþim tecrübelerini buradan yönet.</p>
-                    <button class="btn btn-success mt-auto" @onclick="GoToExperiences">Deneyim Yönetimi</button>
+                    <p class="card-text flex-grow-1">GeÃ§miÅŸ iÅŸ, staj ve giriÅŸim tecrÃ¼belerini buradan yÃ¶net.</p>
+                    <button class="btn btn-success mt-auto" @onclick="GoToExperiences">Deneyim YÃ¶netimi</button>
                 </div>
             </div>
         </div>
@@ -47,19 +47,30 @@
             <div class="card shadow-sm border-info h-100">
                 <div class="card-body text-center d-flex flex-column">
                     <h5 class="card-title text-info">Yetenekler</h5>
-                    <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yönet.</p>
-                    <button class="btn btn-info  mt-auto" @onclick="GoToSkills">Yetenekleri Yönet</button>
+                    <p class="card-text flex-grow-1">Teknik becerilerini ve yetkinlik seviyelerini yÃ¶net.</p>
+                    <button class="btn btn-info  mt-auto" @onclick="GoToSkills">Yetenekleri YÃ¶net</button>
                 </div>
             </div>
         </div>
 
-        @* PROFÝL AYARLARI *@
+        @* PROFÄ°L AYARLARI *@
         <div class="col-md-4 mb-3">
             <div class="card shadow-sm border-warning h-100">
                 <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title text-warning">Profil Ayarlarý</h5>
-                    <p class="card-text flex-grow-1">Kiþisel bilgilerini, sosyal medya linklerini ve biyografini düzenle.</p>
-                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili Düzenle</button>
+                    <h5 class="card-title text-warning">Profil AyarlarÄ±</h5>
+                    <p class="card-text flex-grow-1">KiÅŸisel bilgilerini, sosyal medya linklerini ve biyografini dÃ¼zenle.</p>
+                    <button class="btn btn-warning mt-auto" @onclick="GoToProfile">Profili DÃ¼zenle</button>
+                </div>
+            </div>
+        </div>
+
+        @* GELEN MESAJLAR *@
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm border-secondary h-100">
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title text-secondary">Gelen Mesajlar</h5>
+                    <p class="card-text flex-grow-1">Ä°letiÅŸim formundan gelen mesajlarÄ± gÃ¶rÃ¼ntÃ¼le ve yÃ¶net.</p>
+                    <button class="btn btn-secondary mt-auto" @onclick="GoToMessages">MesajlarÄ± Oku</button>
                 </div>
             </div>
         </div>
@@ -91,5 +102,10 @@
     private void GoToProfile()
     {
         NavigationManager.NavigateTo("/admin/profile");
+    }
+
+    private void GoToMessages()
+    {
+        NavigationManager.NavigateTo("/admin/messages");
     }
 }

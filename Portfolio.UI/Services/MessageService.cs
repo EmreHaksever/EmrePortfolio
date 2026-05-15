@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using Portfolio.UI.Models;
 
 namespace Portfolio.UI.Services;
@@ -32,6 +32,13 @@ public class MessageService
     public async Task<bool> DeleteMessageAsync(int id)
     {
         var response = await _httpClient.DeleteAsync($"api/messages/{id}");
+        return response.IsSuccessStatusCode;
+    }
+
+    // Mesajı okundu olarak işaretleme metodu
+    public async Task<bool> MarkAsReadAsync(int id)
+    {
+        var response = await _httpClient.PostAsync($"api/messages/mark-as-read/{id}", null);
         return response.IsSuccessStatusCode;
     }
 }
