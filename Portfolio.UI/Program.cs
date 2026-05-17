@@ -12,16 +12,18 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 // 1. Kuryemizi sisteme kaydediyoruz
 builder.Services.AddTransient<JwtAuthorizationHandler>();
 
-// 2. HttpClient Factory'i kuruyoruz ve Kuryeyi (Handler) araya sokuyoruz
+// 2. HttpClient Factory'i kuruyoruz ve ApiBaseUrl deÄŸerini dinamik olarak okuyoruz
+var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:7032/";
+
 builder.Services.AddHttpClient("PortfolioAPI", client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7032/"); // Kendi portun
+    client.BaseAddress = new Uri(apiBaseUrl);
 }).AddHttpMessageHandler<JwtAuthorizationHandler>();
 
-// 3. Sistem "Bana HttpClient ver" dediðinde, kuryeli olan bu özel Client'ý teslim et diyoruz
+// 3. Sistem "Bana HttpClient ver" dediÄŸinde, kuryeli olan bu Ã¶zel Client'Ä± teslim et diyoruz
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("PortfolioAPI"));
 
-// 4. Diðer Servisler
+// 4. DiÄŸer Servisler
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ProjectService>();

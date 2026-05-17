@@ -1,0 +1,9 @@
+**/.git
+**/.vs
+**/bin
+**/obj
+**/publish
+**/.env
+**/appsettings.Development.json
+**/node_modules
+*.md

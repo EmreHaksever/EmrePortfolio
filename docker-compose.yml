@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Database Service (MSSQL Server)
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: portfolio-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourSecurePassword123!
+    ports:
+      - "1433:1433"
+    volumes:
+      - db-data:/var/opt/mssql
+    restart: always
+
+  # Backend API Service
+  api:
+    build:
+      context: .
+      dockerfile: Portfolio.API/Dockerfile
+    container_name: portfolio-api
+    environment:
+      - DB_CONNECTION_STRING=Server=db;Database=EmrePortfolioDb;User Id=sa;Password=YourSecurePassword123!;TrustServerCertificate=True;
+      - JWT_KEY=EmreHakseverPortfolioProjectSecretKey2026
+      - ADMIN_USERNAME=emre
+      - ADMIN_PASSWORD=Emre12345!
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5000:8080"
+    depends_on:
+      - db
+    restart: always
+
+  # Frontend UI Service
+  ui:
+    build:
+      context: .
+      dockerfile: Portfolio.UI/Dockerfile
+    container_name: portfolio-ui
+    ports:
+      - "8080:80"
+    restart: always
+
+volumes:
+  db-data:
