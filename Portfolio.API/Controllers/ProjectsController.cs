@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.Business.Abstract;
 using Portfolio.Business.DTOs;
@@ -71,5 +71,13 @@ public class ProjectsController : ControllerBase
     {
         await _projectService.DeleteProjectAsync(id);
         return Ok(new { message = "Proje başarıyla silindi." });
+    }
+
+    [HttpPost("update-order")]
+    [Authorize]
+    public async Task<IActionResult> UpdateOrder([FromBody] List<int> sortedIds)
+    {
+        await _projectService.UpdateProjectOrdersAsync(sortedIds);
+        return Ok(new { message = "Proje sıralaması başarıyla güncellendi." });
     }
 }

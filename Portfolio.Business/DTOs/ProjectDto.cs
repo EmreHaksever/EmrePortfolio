@@ -1,4 +1,4 @@
-﻿namespace Portfolio.Business.DTOs;
+namespace Portfolio.Business.DTOs;
 
 public class ProjectDto
 {
@@ -7,4 +7,5 @@ public class ProjectDto
     public string Summary { get; set; }
     public string TechnicalDetail { get; set; }
     public string Tags { get; set; }
+    public int SortOrder { get; set; }
 }

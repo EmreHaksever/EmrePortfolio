@@ -78,5 +78,9 @@
 
 @code {
     private List<ProjectDto> projects;
-    protected override async Task OnInitializedAsync() => projects = await ProjectService.GetAllProjectsAsync();
+    protected override async Task OnInitializedAsync()
+    {
+        var rawProjects = await ProjectService.GetAllProjectsAsync();
+        projects = rawProjects?.OrderBy(p => p.SortOrder).ToList();
+    }
 }

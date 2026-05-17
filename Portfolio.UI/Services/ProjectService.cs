@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using Portfolio.UI.Models;
 
 namespace Portfolio.UI.Services;
@@ -42,6 +42,13 @@ public class ProjectService
     public async Task<bool> UpdateProjectAsync(UpdateProjectDto updateProjectDto)
     {
         var response = await _httpClient.PutAsJsonAsync("api/projects", updateProjectDto);
+        return response.IsSuccessStatusCode;
+    }
+
+    // Sıralamayı güncelle
+    public async Task<bool> UpdateProjectOrdersAsync(List<int> sortedIds)
+    {
+        var response = await _httpClient.PostAsJsonAsync("api/projects/update-order", sortedIds);
         return response.IsSuccessStatusCode;
     }
 }

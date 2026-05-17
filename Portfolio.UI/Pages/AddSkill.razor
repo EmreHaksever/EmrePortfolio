@@ -5,39 +5,72 @@
 @inject SkillService SkillService
 @inject NavigationManager NavigationManager
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-info">
-                <div class="card-header bg-info ">
-                    <h4 class="mb-0">Yeni Yetenek Ekle</h4>
+<div class="vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="background-color: #f8fafc; margin-top: -80px;">
+    <!-- Background Decorators -->
+    <div class="position-absolute" style="top: -100px; left: -100px; width: 300px; height: 300px; background: rgba(14, 165, 233, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+    <div class="position-absolute" style="bottom: -100px; right: -100px; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-dark mb-1">Yeni Yetenek Ekle</h2>
+                    <p class="text-secondary small">Kabiliyetlerinizi kategori bazlı sınıflandırın</p>
                 </div>
-                <div class="card-body">
 
-                    <div class="mb-3">
-                        <label class="form-label">Yetenek Ad�</label>
-                        <input type="text" class="form-control" @bind="newSkill.Name" placeholder="�rn: C#, React Native, 3D Modelleme" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kategori</label>
-                        <select class="form-select" @bind="newSkill.Category">
-                            <option value="">Se�iniz...</option>
-                            <option value="Backend">Backend / Sunucu</option>
-                            <option value="Frontend">Frontend / Aray�z</option>
-                            <option value="Mobile">Mobil Geli�tirme</option>
-                            <option value="Database">Veritaban�</option>
-                            <option value="Design">Tasar�m / 3D �malat</option>
-                            <option value="Other">Di�er</option>
-                        </select>
-                        <div class="form-text text-muted">Yetene�inizi uygun bir kategoriye atay�n.</div>
-                    </div>
-                    
-
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-secondary" @onclick='() => NavigationManager.NavigateTo("/admin/skills")'>�ptal</button>
-                        <button class="btn btn-info " @onclick="HandleSave">Kaydet</button>
+                <div class="glass-panel p-4 p-md-5 shadow-lg border-0 rounded-4 bg-white">
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Yetenek Adı</label>
+                        <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                            <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-primary);">
+                                <i class="bi bi-lightning-charge"></i>
+                            </span>
+                            <input type="text" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Örn: C#, React Native, Docker" @bind="newSkill.Name" style="box-shadow: none;" />
+                        </div>
                     </div>
 
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Kategori</label>
+                        <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                            <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-primary);">
+                                <i class="bi bi-tag"></i>
+                            </span>
+                            <select class="form-select border-0 bg-transparent py-2 ps-0" @onchange="OnCategoryChanged" value="@selectedCategory" style="box-shadow: none;">
+                                <option value="">Kategori Seçiniz...</option>
+                                <option value="Programlama Dilleri">Programlama Dilleri</option>
+                                <option value="Frameworkler & Kütüphaneler">Frameworkler & Kütüphaneler</option>
+                                <option value="Backend Geliştirme">Backend Geliştirme</option>
+                                <option value="Frontend Geliştirme">Frontend Geliştirme</option>
+                                <option value="Mobil Geliştirme">Mobil Geliştirme</option>
+                                <option value="Veritabanı">Veritabanı Yönetimi</option>
+                                <option value="DevOps & Araçlar">DevOps & Araçlar</option>
+                                <option value="Tasarım & 3D Modelleme">Tasarım & 3D Modelleme</option>
+                                <option value="Custom">Diğer (Kendiniz Yazın...)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @if (selectedCategory == "Custom")
+                    {
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Özel Kategori Adı</label>
+                            <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                                <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-purple);">
+                                    <i class="bi bi-folder-plus"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Örn: Siber Güvenlik, Yapay Zeka" @bind="customCategory" style="box-shadow: none;" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button class="btn btn-outline w-50 py-2 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" @onclick='() => NavigationManager.NavigateTo("/admin/skills")'>
+                            <i class="bi bi-x-circle"></i> İptal
+                        </button>
+                        <button class="btn btn-primary w-50 py-2 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" @onclick="HandleSave">
+                            <i class="bi bi-check-circle"></i> Kaydet
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,13 +78,26 @@
 </div>
 
 @code {
-    private CreateSkillDto newSkill = new CreateSkillDto
+    private CreateSkillDto newSkill = new CreateSkillDto();
+    private string selectedCategory = "";
+    private string customCategory = "";
+
+    private void OnCategoryChanged(ChangeEventArgs e)
     {
-       
-    };
+        selectedCategory = e.Value?.ToString() ?? "";
+    }
 
     private async Task HandleSave()
     {
+        if (selectedCategory == "Custom")
+        {
+            newSkill.Category = customCategory;
+        }
+        else
+        {
+            newSkill.Category = selectedCategory;
+        }
+
         var isSuccess = await SkillService.CreateSkillAsync(newSkill);
         if (isSuccess)
         {

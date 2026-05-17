@@ -5,44 +5,81 @@
 @inject SkillService SkillService
 @inject NavigationManager NavigationManager
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-warning">
-                <div class="card-header bg-warning text-dark">
-                    <h4 class="mb-0">Yetenek Düzenle</h4>
+<div class="vh-100 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="background-color: #f8fafc; margin-top: -80px;">
+    <!-- Background Decorators -->
+    <div class="position-absolute" style="top: -100px; left: -100px; width: 300px; height: 300px; background: rgba(14, 165, 233, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+    <div class="position-absolute" style="bottom: -100px; right: -100px; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.1); filter: blur(80px); border-radius: 50%;"></div>
+
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-dark mb-1">Yetenek Düzenle</h2>
+                    <p class="text-secondary small">Kabiliyetinizi güncelleyin ve sınıflandırın</p>
                 </div>
-                <div class="card-body">
+
+                <div class="glass-panel p-4 p-md-5 shadow-lg border-0 rounded-4 bg-white">
                     @if (updateSkill == null)
                     {
-                        <p><em>Yükleniyor...</em></p>
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Yükleniyor...</span>
+                            </div>
+                        </div>
                     }
                     else
                     {
-                        <div class="mb-3">
-                            <label class="form-label">Yetenek Adı</label>
-                            <input type="text" class="form-control" @bind="updateSkill.Name" />
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Kategori</label>
-                            <select class="form-select" @bind="updateSkill.Category">
-                                <option value="">Seçiniz...</option>
-                                <option value="Backend">Backend / Sunucu</option>
-                                <option value="Frontend">Frontend / Arayüz</option>
-                                <option value="Mobile">Mobil Geliştirme</option>
-                                <option value="Database">Veritabanı</option>
-                                <option value="Design">Tasarım / 3D İmalat</option>
-                                <option value="Other">Diğer</option>
-                            </select>
-                            <div class="form-text text-muted">Yeteneğinizi uygun bir kategoriye atayın.</div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Yetenek Adı</label>
+                            <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                                <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-primary);">
+                                    <i class="bi bi-lightning-charge"></i>
+                                </span>
+                                <input type="text" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Yetenek adınız" @bind="updateSkill.Name" style="box-shadow: none;" />
+                            </div>
                         </div>
 
-                     
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Kategori</label>
+                            <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                                <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-primary);">
+                                    <i class="bi bi-tag"></i>
+                                </span>
+                                <select class="form-select border-0 bg-transparent py-2 ps-0" @onchange="OnCategoryChanged" value="@selectedCategory" style="box-shadow: none;">
+                                    <option value="">Kategori Seçiniz...</option>
+                                    <option value="Programlama Dilleri">Programlama Dilleri</option>
+                                    <option value="Frameworkler & Kütüphaneler">Frameworkler & Kütüphaneler</option>
+                                    <option value="Backend Geliştirme">Backend Geliştirme</option>
+                                    <option value="Frontend Geliştirme">Frontend Geliştirme</option>
+                                    <option value="Mobil Geliştirme">Mobil Geliştirme</option>
+                                    <option value="Veritabanı">Veritabanı Yönetimi</option>
+                                    <option value="DevOps & Araçlar">DevOps & Araçlar</option>
+                                    <option value="Tasarım & 3D Modelleme">Tasarım & 3D Modelleme</option>
+                                    <option value="Custom">Diğer (Kendiniz Yazın...)</option>
+                                </select>
+                            </div>
+                        </div>
 
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-secondary" @onclick="GoBack">İptal</button>
-                            <button class="btn btn-warning" @onclick="HandleUpdate">Değişiklikleri Kaydet</button>
+                        @if (selectedCategory == "Custom")
+                        {
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Özel Kategori Adı</label>
+                                <div class="input-group bg-light rounded-3 overflow-hidden shadow-sm border">
+                                    <span class="input-group-text border-0 bg-transparent px-3" style="color: var(--accent-purple);">
+                                        <i class="bi bi-folder-plus"></i>
+                                    </span>
+                                    <input type="text" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Örn: Siber Güvenlik, Yapay Zeka" @bind="customCategory" style="box-shadow: none;" />
+                                </div>
+                            </div>
+                        }
+
+                        <div class="d-flex gap-3 mt-4">
+                            <button class="btn btn-outline w-50 py-2 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" @onclick="GoBack">
+                                <i class="bi bi-x-circle"></i> İptal
+                            </button>
+                            <button class="btn btn-primary w-50 py-2 fw-bold rounded-3 shadow-sm d-flex align-items-center justify-content-center gap-2" @onclick="HandleUpdate">
+                                <i class="bi bi-check-circle"></i> Değişiklikleri Kaydet
+                            </button>
                         </div>
                     }
                 </div>
@@ -56,6 +93,8 @@
     public int Id { get; set; }
 
     private UpdateSkillDto updateSkill;
+    private string selectedCategory = "";
+    private string customCategory = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,15 +108,59 @@
                 Name = existingSkill.Name,
                 Category = existingSkill.Category
             };
+
+            var predefined = new List<string> { 
+                "Programlama Dilleri", 
+                "Frameworkler & Kütüphaneler", 
+                "Backend Geliştirme", 
+                "Frontend Geliştirme", 
+                "Mobil Geliştirme", 
+                "Veritabanı", 
+                "DevOps & Araçlar", 
+                "Tasarım & 3D Modelleme" 
+            };
+
+            if (predefined.Contains(existingSkill.Category))
+            {
+                selectedCategory = existingSkill.Category;
+                customCategory = "";
+            }
+            else if (!string.IsNullOrEmpty(existingSkill.Category))
+            {
+                selectedCategory = "Custom";
+                customCategory = existingSkill.Category;
+            }
+            else
+            {
+                selectedCategory = "";
+                customCategory = "";
+            }
         }
+    }
+
+    private void OnCategoryChanged(ChangeEventArgs e)
+    {
+        selectedCategory = e.Value?.ToString() ?? "";
     }
 
     private async Task HandleUpdate()
     {
-        var isSuccess = await SkillService.UpdateSkillAsync(updateSkill);
-        if (isSuccess)
+        if (updateSkill != null)
         {
-            NavigationManager.NavigateTo("/admin/skills");
+            if (selectedCategory == "Custom")
+            {
+                updateSkill.Category = customCategory;
+            }
+            else
+            {
+                updateSkill.Category = selectedCategory;
+            }
+
+            var isSuccess = await SkillService.UpdateSkillAsync(updateSkill);
+            if (isSuccess)
+            {
+                NavigationManager.NavigateTo("/admin/skills");
+            }
         }
     }
 

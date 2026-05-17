@@ -1,4 +1,4 @@
-﻿namespace Portfolio.UI.Models;
+namespace Portfolio.UI.Models;
 
 public class UpdateProjectDto
 {
@@ -7,4 +7,5 @@ public class UpdateProjectDto
     public string Summary { get; set; }
     public string TechnicalDetail { get; set; }
     public string Tags { get; set; }
+    public int SortOrder { get; set; }
 }

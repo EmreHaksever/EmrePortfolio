@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Business.Abstract;
 using Portfolio.Business.DTOs;
@@ -21,7 +21,7 @@ public class ProjectManager : IProjectService
 
     public async Task<List<ProjectDto>> GetAllProjectsAsync()
     {
-        var projects = await _context.Projects.ToListAsync();
+        var projects = await _context.Projects.OrderBy(p => p.SortOrder).ToListAsync();
 
         // Entity listesini DTO listesine çeviriyoruz (Mapping)
         var projectDtos = projects.Select(p => new ProjectDto
@@ -30,7 +30,8 @@ public class ProjectManager : IProjectService
             Name = p.Name,
             Summary = p.Summary,
             TechnicalDetail = p.TechnicalDetail,
-            Tags = p.Tags
+            Tags = p.Tags,
+            SortOrder = p.SortOrder
         }).ToList();
 
         return projectDtos;
@@ -47,7 +48,8 @@ public class ProjectManager : IProjectService
             Name = project.Name,
             Summary = project.Summary,
             TechnicalDetail = project.TechnicalDetail,
-            Tags = project.Tags
+            Tags = project.Tags,
+            SortOrder = project.SortOrder
         };
     }
 
@@ -72,16 +74,38 @@ public class ProjectManager : IProjectService
 
     public async Task AddProjectAsync(CreateProjectDto createProjectDto)
     {
+        var maxOrder = await _context.Projects.AnyAsync() 
+            ? await _context.Projects.MaxAsync(p => p.SortOrder) 
+            : 0;
+
         // Dışarıdan gelen DTO'yu veritabanı nesnesine (Entity) çeviriyoruz
         var newProject = new Project
         {
             Name = createProjectDto.Name,
             Summary = createProjectDto.Summary,
             TechnicalDetail = createProjectDto.TechnicalDetail,
-            Tags = createProjectDto.Tags
+            Tags = createProjectDto.Tags,
+            SortOrder = maxOrder + 1
         };
 
         await _context.Projects.AddAsync(newProject);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateProjectOrdersAsync(List<int> sortedIds)
+    {
+        if (sortedIds == null || !sortedIds.Any()) return;
+
+        for (int i = 0; i < sortedIds.Count; i++)
+        {
+            var id = sortedIds[i];
+            var project = await _context.Projects.FindAsync(id);
+            if (project != null)
+            {
+                project.SortOrder = i + 1;
+                _context.Projects.Update(project);
+            }
+        }
         await _context.SaveChangesAsync();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,4 +13,5 @@ public class Project
     public string Summary { get; set; } // Proje Özeti
     public string TechnicalDetail { get; set; } // Teknik Detay
     public string Tags { get; set; } // Ekranda etiket olarak göstermek için (Örn: ".NET, MSSQL, EF Core")
+    public int SortOrder { get; set; }
 }

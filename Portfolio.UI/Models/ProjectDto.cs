@@ -1,6 +1,4 @@
-﻿namespace Portfolio.UI.Models;
-
-
+namespace Portfolio.UI.Models;
 
 public class ProjectDto
 {
@@ -9,6 +7,7 @@ public class ProjectDto
     public string Summary { get; set; }         // Summary (Entity ile aynı)
     public string TechnicalDetail { get; set; } // Teknik Detay
     public string Tags { get; set; }            // Etiketler
+    public int SortOrder { get; set; }
 }
 
 public class CreateProjectDto
@@ -17,4 +16,5 @@ public class CreateProjectDto
     public string Summary { get; set; }
     public string TechnicalDetail { get; set; }
     public string Tags { get; set; }
+    public int SortOrder { get; set; }
 }
