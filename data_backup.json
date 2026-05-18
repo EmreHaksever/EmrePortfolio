@@ -1,0 +1,143 @@
+{
+  "AppUsers": [
+    {
+      "Id": 1,
+      "Username": "admin",
+      "Password": "Hkseygcm321."
+    },
+    {
+      "Id": 2,
+      "Username": "emre",
+      "Password": "Hkseygcm321."
+    }
+  ],
+  "ProfileInfos": [
+    {
+      "Id": 1,
+      "FullName": "Emre Haksever",
+      "Title": "Bilgisayar M\u00FChendisi",
+      "Summary": "Bilgisayar M\u00FChendisli\u011Fi 4. s\u0131n\u0131f \u00F6\u011Frencisi olarak .NET, Node.js ve React.js ekosistemlerine odaklan\u0131yorum. Akademik bilgimi, Ar-Ge stajlar\u0131 ve full-stack projelerle birle\u015Ftirerek karma\u015F\u0131k problemlere \u00F6l\u00E7eklenebilir \u00E7\u00F6z\u00FCmler \u00FCretmeyi hedefleyen, \u00E7\u00F6z\u00FCm odakl\u0131 bir m\u00FChendis aday\u0131y\u0131m.\n",
+      "Gpa": 3.31,
+      "Email": "emre.haksever2@gmail.com",
+      "Phone": "0551 987 4599",
+      "GithubUrl": "https://github.com/EmreHaksever",
+      "LinkedInUrl": "www.linkedin.com/in/emre-haksever-81382230a"
+    }
+  ],
+  "Experiences": [
+    {
+      "Id": 3,
+      "Title": "Stajyer M\u00FChendis",
+      "Company": "Kaps\u00FCl Teknoloji Platformu",
+      "Location": "Konya",
+      "StartDate": "2024-07-06T00:00:00",
+      "EndDate": "2024-08-06T00:00:00",
+      "Description": "Node.js ile backend geli\u015Ftirdim."
+    },
+    {
+      "Id": 4,
+      "Title": "Stajyer M\u00FChendis",
+      "Company": "Chip Computer",
+      "Location": "Uzaktan",
+      "StartDate": "2025-08-17T00:00:00",
+      "EndDate": "2026-02-15T00:00:00",
+      "Description": ".NET Core ile Ar-Ge projeleri geli\u015Ftirdim."
+    }
+  ],
+  "Projects": [
+    {
+      "Id": 3,
+      "Name": "Pediatric Rash Analysis (Mezuniyet Projesi)",
+      "Summary": "Pediatrik vakalarda deri d\u00F6k\u00FCnt\u00FClerinin te\u015Fhis ve analiz s\u00FCre\u00E7lerini optimize etmek amac\u0131yla Node.js ve React Native teknolojileriyle geli\u015Ftirilmi\u015F, yapay zeka tabanl\u0131 mobil klinik karar destek sistemi (CDSS). Sistem, e\u011Fitilmi\u015F bir g\u00F6r\u00FCnt\u00FC i\u015Fleme/makine \u00F6\u011Frenmesi modeli \u00FCzerinden asenkron semptom analizi ger\u00E7ekle\u015Ftirerek, hekimlerin klinik karar alma s\u00FCre\u00E7lerini u\u00E7tan uca destekleyen hibrit bir mobil mimari sunar.",
+      "TechnicalDetail": "Bu proje, kritik ve hassas bir alan olan sa\u011Fl\u0131k sekt\u00F6r\u00FCne y\u00F6nelik, y\u00FCksek performansl\u0131 ve g\u00FCvenli bir mobil t\u0131bbi yaz\u0131l\u0131m (Medical Software) standard\u0131nda ve \u015Fu teknik katmanlarla kurgulanm\u0131\u015Ft\u0131r:\n\n1. Yapay Zeka Entegrasyonu ve Semptom Analizi:\n- Karar Destek Mekanizmas\u0131: E\u011Fitilmi\u015F bir derin \u00F6\u011Frenme / g\u00F6r\u00FCnt\u00FC i\u015Fleme modeli, backend katman\u0131na entegre edilmi\u015Ftir. Mobil cihazdan gelen d\u00F6k\u00FCnt\u00FC g\u00F6rselleri ve semptom verileri, API \u00FCzerinden model taraf\u0131ndan i\u015Flenerek olas\u0131l\u0131k tabanl\u0131 klinik \u00F6n te\u015Fhis \u00E7\u0131kt\u0131lar\u0131 \u00FCretir.\n- Asenkron \u0130\u015F Ak\u0131\u015Flar\u0131: Analiz s\u00FCre\u00E7lerinin mobil kullan\u0131c\u0131 deneyimini (UX) bloke etmemesi ad\u0131na istekler asenkron yap\u0131larla y\u00F6netilmi\u015F ve sonu\u00E7lar ger\u00E7ek zamanl\u0131 olarak istemciye iletilmi\u015Ftir.\n\n2. Mobil Mimari ve Kullan\u0131c\u0131 Deneyimi (Frontend):\n- React Native \u0026 Cross-Platform: \u0130ki b\u00FCy\u00FCk mobil platformda (iOS ve Android) da p\u00FCr\u00FCzs\u00FCz \u00E7al\u0131\u015Fabilen, yerel (native) performans sunan bir mobil aray\u00FCz geli\u015Ftirilmi\u015Ftir.\n- Klinik Kullan\u0131c\u0131 Deneyimi (Clinical UX): Hekimlerin ve sa\u011Fl\u0131k personelinin acil durumlarda h\u0131zl\u0131 aksiyon alabilmesi i\u00E7in temiz, sade ve veri odakl\u0131 form tasar\u0131mlar\u0131 ile dosya/g\u00F6rsel y\u00FCkleme mod\u00FClleri kurgulanm\u0131\u015Ft\u0131r.\n\n3. Sunucu ve Veri Y\u00F6netimi S\u00FCre\u00E7leri (Backend):\n- Node.js \u0026 RESTful API: \u00D6l\u00E7eklenebilir, event-driven (olay g\u00FCd\u00FCml\u00FC) ve I/O i\u015Flemlerinde y\u00FCksek performansl\u0131 Node.js mimarisi \u00FCzerinde, mobil uygulaman\u0131n t\u00FCketti\u011Fi g\u00FCvenli endpoint\u0027ler tasarlanm\u0131\u015Ft\u0131r.\n- Sa\u011Fl\u0131k Verisi Y\u00F6netimi: Hastalar\u0131n demografik bilgileri, semptom ge\u00E7mi\u015Fleri ve analiz sonu\u00E7lar\u0131; veri b\u00FCt\u00FCnl\u00FC\u011F\u00FC, gizlilik ilkeleri ve KVKK/HIPAA gibi sa\u011Fl\u0131k verisi hassasiyetleri g\u00F6z \u00F6n\u00FCnde bulundurularak ili\u015Fkisel/dok\u00FCman tabanl\u0131 veri tabanlar\u0131 \u00FCzerinde g\u00FCvenli \u015Fekilde modellenmi\u015Ftir.",
+      "Tags": "React Native, Node.js, Artificial Intelligence, Mobile Development, Clinical Decision Support System (CDSS), RESTful API, HealthTech, Data Management, Asynchronous Processing",
+      "SortOrder": 1
+    },
+    {
+      "Id": 4,
+      "Name": "MiniERP Sistemi",
+      "Summary": "\u0130\u015Fletmelerin \u00FCr\u00FCn y\u00F6netimi, dinamik stok takibi ve sipari\u015F s\u00FCre\u00E7lerini merkezi bir sistem \u00FCzerinden optimize etmek amac\u0131yla Katmanl\u0131 Mimari (Layered Architecture) prensipleriyle kurgulanm\u0131\u015F; kurumsal standartlarda, \u00F6l\u00E7eklenebilir ve y\u00FCksek performansl\u0131 bir Mini ERP backend \u00E7\u00F6z\u00FCm\u00FC. Proje; veri tutarl\u0131l\u0131\u011F\u0131, e\u015Fzamanl\u0131l\u0131k (concurrency) kontrol\u00FC ve g\u00FCvenli veri ak\u0131\u015F\u0131 y\u00F6netimi s\u00FCre\u00E7lerini u\u00E7tan uca adreslemektedir.",
+      "TechnicalDetail": "Proje, kurumsal kaynak planlama (ERP) yaz\u0131l\u0131mlar\u0131n\u0131n gerektirdi\u011Fi y\u00FCksek veri g\u00FCvenli\u011Fi, tutarl\u0131l\u0131k ve performans standartlar\u0131n\u0131 kar\u015F\u0131lamak ad\u0131na \u015Fu teknik katmanlar ve mimari kararlarla geli\u015Ftirilmi\u015Ftir:\n\n1. Katmanl\u0131 Mimari Tasar\u0131m\u0131 (Layered Architecture) \u0026 Seperational of Concerns:\n- Sorumluluklar\u0131n Ayr\u0131lmas\u0131: Uygulama; veri taban\u0131 eri\u015Fimi (Data Access), i\u015F kurallar\u0131 (Business Logic) ve sunum/eri\u015Fim (API) katmanlar\u0131na ayr\u0131lm\u0131\u015Ft\u0131r. Bu sayede i\u015F kurallar\u0131, veritaban\u0131 teknolojisinden tamamen ba\u011F\u0131ms\u0131zla\u015Ft\u0131r\u0131larak mod\u00FCler ve test edilebilir bir yap\u0131 elde edilmi\u015Ftir.\n- Business Logic Y\u00F6netimi: Stok kritik seviye kontrolleri, \u00FCr\u00FCn-sipari\u015F e\u015Fle\u015Fmeleri ve dinamik fiyatland\u0131rma gibi t\u00FCm kompleks kurallar merkezi i\u015F katman\u0131 (Business Layer) \u00FCzerinde soyutlanarak kurgulanm\u0131\u015Ft\u0131r.\n\n2. Veritaban\u0131 Mimarisi ve EF Core Optimizasyonu:\n- Y\u00FCksek Performansl\u0131 \u0130li\u015Fkisel Model: \u00DCr\u00FCnler, Kategoriler, Stok Hareketleri ve Sipari\u015Fler aras\u0131ndaki karma\u015F\u0131k ili\u015Fkiler (One-to-Many, Many-to-Many) veri b\u00FCt\u00FCnl\u00FC\u011F\u00FCn\u00FC koruyacak \u015Fekilde MS SQL Server \u00FCzerinde modellenmi\u015Ftir.\n- EF Core \u0026 Asenkron Veri Ak\u0131\u015F\u0131: Veritaban\u0131 sorgular\u0131 LINQ (Language Integrated Query) kullan\u0131larak optimize edilmi\u015F; sistemin kilitlenmesini (blocking) \u00F6nlemek amac\u0131yla t\u00FCm I/O i\u015Flemleri asenkron (async/await) pattern\u0027lerle y\u00FCr\u00FCt\u00FClm\u00FC\u015Ft\u00FCr.\n- Veritaban\u0131 Migrasyonlar\u0131 (Migrations): Code-First yakla\u015F\u0131m\u0131yla geli\u015Ftirilen veri modelindeki de\u011Fi\u015Fiklikler, veritaban\u0131 \u015Femas\u0131na g\u00FCvenli migrasyon ad\u0131mlar\u0131 ve versiyon kontrol\u00FC mant\u0131\u011F\u0131yla yans\u0131t\u0131lm\u0131\u015Ft\u0131r.\n\n3. G\u00FCvenli Veri Ak\u0131\u015F\u0131 ve DTO Haritalama:\n- DTO (Data Transfer Object) Tasar\u0131m\u0131: \u0130stek (Request) ve yan\u0131t (Response) s\u00FCre\u00E7lerinde a\u015F\u0131r\u0131 veri ta\u015F\u0131nmas\u0131n\u0131 (over-posting) engellemek ve g\u00FCvenlik a\u00E7\u0131klar\u0131n\u0131 kapatmak ad\u0131na katmanlar aras\u0131 veri transferi tamamen DTO\u0027lar \u00FCzerinden sa\u011Flanm\u0131\u015Ft\u0131r.\n- Veri Do\u011Frulama (Validation) \u0026 G\u00FCvenlik: Sipari\u015F miktarlar\u0131n\u0131n, stok adetlerinin ve \u00FCr\u00FCn bilgilerinin veritaban\u0131na ula\u015Fmadan \u00F6nce do\u011Frulanmas\u0131 sa\u011Flanarak, hatal\u0131 ve tutars\u0131z veri giri\u015Fleri mimari seviyede engellenmi\u015Ftir.",
+      "Tags": ".NET 8, ASP.NET Core Web API, Entity Framework Core, MS SQL Server, Layered Architecture, DTO Mapping, Database Migrations, LINQ, Relational Database Design, Transaction Management",
+      "SortOrder": 3
+    },
+    {
+      "Id": 5,
+      "Name": "MyParking Mobil Uygulamas\u0131",
+      "Summary": "Kullan\u0131c\u0131lar\u0131n ara\u00E7 park konumlar\u0131n\u0131 asenkron harita entegrasyonu \u00FCzerinden hassas ad\u0131mlarla i\u015Faretleyebildi\u011Fi, co\u011Frafi konum servisleri (GPS) ve ak\u0131ll\u0131 yerel bildirim (Local Notification) mekanizmalar\u0131 kullanarak park s\u00FCresi hat\u0131rlatmalar\u0131 sunan, React Native ile \u00E7apraz platform (Cross-Platform) standartlar\u0131nda geli\u015Ftirilmi\u015F ak\u0131ll\u0131 bir lokasyon/mobil asistan uygulamas\u0131.",
+      "TechnicalDetail": "Uygulama, mobil cihazlar\u0131n donan\u0131msal yeteneklerini ve arka plan servislerini en y\u00FCksek performans ve minimum kaynak (pil/haf\u0131za) t\u00FCketimiyle y\u00F6netmek amac\u0131yla \u015Fu teknik altyap\u0131yla kurgulanm\u0131\u015Ft\u0131r:\n\n1. Geli\u015Fmi\u015F Konum Servisleri (GPS) ve Co\u011Frafi Entegrasyon:\n- Geolocation API ve Donan\u0131m Eri\u015Fimi: Cihaz\u0131n yerle\u015Fik GPS donan\u0131m\u0131na do\u011Frudan eri\u015Filerek kullan\u0131c\u0131n\u0131n anl\u0131k koordinatlar\u0131 y\u00FCksek do\u011Fruluk (High Accuracy) modunda asenkron olarak yakalanm\u0131\u015Ft\u0131r.\n- Harita Mod\u00FCl\u00FC ve \u0130\u015Faretleme: Yakalanan enlem-boylam verileri, dinamik bir harita aray\u00FCz\u00FC \u00FCzerine entegre edilmi\u015Ftir. Kullan\u0131c\u0131n\u0131n tek dokunu\u015Fla (Marker) park konumunu kaydetmesi, koordinatlar\u0131n lokal haf\u0131zada state y\u00F6netim s\u00FCre\u00E7lerine dahil edilmesi sa\u011Flanm\u0131\u015Ft\u0131r.\n\n2. Ak\u0131ll\u0131 Yerel Bildirim (Local Notification) Y\u00F6netimi:\n- \u0130\u015Fletim Sistemi Seviyesinde Zamanlama: Park s\u00FCrelerinin takibi ve s\u00FCre a\u015F\u0131m\u0131 uyar\u0131lar\u0131 i\u00E7in harici bir sunucuya (Push Notification) ihtiya\u00E7 duyulmaks\u0131z\u0131n, cihaz\u0131n kendi yerel i\u015Fletim sistemi bildirim motoru (iOS/Android Native Notification) tetiklenmi\u015Ftir.\n- Arka Plan (Background) ve Kilitli Ekran Y\u00F6netimi: Uygulama arka planda veya tamamen kapal\u0131yken bile arka plan zamanlay\u0131c\u0131lar\u0131 (Background Timers) vas\u0131tas\u0131yla uyar\u0131n\u0131n tam zaman\u0131nda, zengin i\u00E7erik ve ses destekli yerel bildirim olarak kullan\u0131c\u0131ya ula\u015Ft\u0131r\u0131lmas\u0131 sa\u011Flanm\u0131\u015Ft\u0131r.\n\n3. \u00C7apraz Platform Optimizasyonu ve Mobil UX:\n- Native Bridges Tasar\u0131m\u0131: React Native\u0027in sundu\u011Fu k\u00F6pr\u00FC mimarisi optimize edilerek, konum g\u00FCncellemelerinin Android ve iOS i\u015Fletim sistemlerinde asenkron \u00E7al\u0131\u015Fmas\u0131 ve cihaz pilini gereksiz yere t\u00FCketmemesi i\u00E7in anl\u0131k sorgulama s\u0131n\u0131rland\u0131rmalar\u0131 (Distance Filter / Polling Rates) uygulanm\u0131\u015Ft\u0131r.\n- Durum Y\u00F6netimi (State Management): Park edilen konum verisi, otopark kat/no notlar\u0131 ve zamanlay\u0131c\u0131 saya\u00E7lar\u0131, uygulama kapat\u0131l\u0131p a\u00E7\u0131lsa dahi kaybolmamas\u0131 ad\u0131na cihaz\u0131n yerel g\u00FCvenli depolama (AsyncStorage) biriminde asenkron olarak saklanm\u0131\u015Ft\u0131r.",
+      "Tags": "React Native, JavaScript, TypeScript, GPS / Location Services, Local Notifications, Geolocation API, Map Integration, Mobile UX, State Management, Core Device Hardware",
+      "SortOrder": 4
+    },
+    {
+      "Id": 6,
+      "Name": "Secure RESTful API Development \u0026 Backend Architecture",
+      "Summary": "C# ve ASP.NET Core Web API teknolojileri kullan\u0131larak kurumsal standartlarda geli\u015Ftirilmi\u015F; g\u00FCvenli veri iletimi, merkezi hata y\u00F6netimi ve tam kapsaml\u0131 CRUD operasyonlar\u0131n\u0131 bar\u0131nd\u0131ran modern, \u00F6l\u00E7eklenebilir ve s\u00FCrd\u00FCr\u00FClebilir bir arka plan (backend) mimarisi projesi. Proje, veri g\u00FCvenli\u011Fini \u00FCst seviyede tutmak amac\u0131yla JWT tabanl\u0131 kimlik do\u011Frulama mekanizmalar\u0131yla desteklenmi\u015Ftir.",
+      "TechnicalDetail": "Proje, bir yaz\u0131l\u0131m\u0131n geni\u015Fletilebilir ve test edilebilir olmas\u0131n\u0131 sa\u011Flayan \u0022Temiz Kod (Clean Code)\u0022 felsefesiyle ve \u015Fu teknik altyap\u0131yla kurgulanm\u0131\u015Ft\u0131r:\n\n1. Veri Y\u00F6netimi ve Katmanl\u0131 Entegrasyon:\n- Entity Framework Core ORM: Veritaban\u0131 y\u00F6netim s\u00FCre\u00E7leri, Code-First yakla\u015F\u0131m\u0131 ve asenkron (async/await) programlama pratikleri kullan\u0131larak EF Core \u00FCzerinden y\u00FCr\u00FCt\u00FClm\u00FC\u015Ft\u00FCr.\n- MS SQL Server \u0026 \u0130li\u015Fkisel Model: Projenin veri modeli, performansl\u0131 sorgulama ve veri b\u00FCt\u00FCnl\u00FC\u011F\u00FC (data integrity) kurallar\u0131na sad\u0131k kal\u0131narak MS SQL Server \u00FCzerinde yap\u0131land\u0131r\u0131lm\u0131\u015Ft\u0131r.\n\n2. G\u00FCvenlik, Kimlik Do\u011Frulama ve Rol Y\u00F6netimi:\n- JWT (JSON Web Token): \u0130stemci ile sunucu aras\u0131ndaki ileti\u015Fim, durumsuz (stateless) ve y\u00FCksek g\u00FCvenlikli JWT mimarisi kullan\u0131larak \u015Fifrelenmi\u015Ftir.\n- Kimlik Do\u011Frulama ve Yetkilendirme: API endpoint\u0027leri [Authorize] \u00F6znitelikleriyle korunmu\u015F, kullan\u0131c\u0131lar\u0131n sadece izin verilen kaynaklara eri\u015Febilmesi i\u00E7in Rol Tabanl\u0131 Yetkilendirme (Role-Based Authorization) altyap\u0131s\u0131 entegre edilmi\u015Ftir.\n\n3. Temiz Kod (Clean Code) ve Mimari Tasar\u0131m Desenleri:\n- SOLID Prensipleri: S\u0131n\u0131flar\u0131n ve metotlar\u0131n tek bir sorumlulu\u011Fa sahip olmas\u0131 (Single Responsibility) ve geni\u015Fletilmeye a\u00E7\u0131k, de\u011Fi\u015Fime kapal\u0131 olmas\u0131 (Open-Closed) prensiplerine s\u0131k\u0131 s\u0131k\u0131ya ba\u011Fl\u0131 kal\u0131nm\u0131\u015Ft\u0131r.\n- Tasar\u0131m Desenleri (Design Patterns): Veritaban\u0131 ba\u011F\u0131ml\u0131l\u0131\u011F\u0131n\u0131 minimize etmek ve kod tekrar\u0131n\u0131 \u00F6nlemek amac\u0131yla Repository Tasar\u0131m Deseni (Repository Pattern) uygulanm\u0131\u015F; veri transfer s\u00FCre\u00E7lerinde g\u00FCvenli\u011Fi ve performans\u0131 optimize etmek i\u00E7in DTO (Data Transfer Object) yap\u0131lar\u0131 kullan\u0131lm\u0131\u015Ft\u0131r.\n- Global Exception Handling: Uygulama genelinde olu\u015Fabilecek hatalar\u0131n istemciye standart ve anlaml\u0131 JSON format\u0131nda d\u00F6nmesi i\u00E7in merkezi bir hata yakalama mekanizmas\u0131 (Middleware) kurgulanm\u0131\u015Ft\u0131r.",
+      "Tags": ".NET Core, ASP.NET Core Web API, Entity Framework Core, MS SQL Server, JWT Authentication, RESTful API, Clean Code, SOLID Principles, Repository Pattern, DTO",
+      "SortOrder": 5
+    },
+    {
+      "Id": 7,
+      "Name": "Algoritma Tasar\u0131m\u0131 ve Analizi",
+      "Summary": "Karma\u015F\u0131k ve b\u00FCy\u00FCk \u00F6l\u00E7ekli veri setleri \u00FCzerinde en k\u0131sa yol (Shortest Path), s\u0131ralama (Sorting) ve arama (Searching) algoritmalar\u0131n\u0131n teorik Big-O karma\u015F\u0131kl\u0131k analizlerinin yap\u0131lmas\u0131 ve bu analizlerin Python diliyle kurgulanan ger\u00E7ek d\u00FCnya senaryolar\u0131nda deneysel performans testleriyle do\u011Frulanarak optimize edilmesini kapsayan geli\u015Fmi\u015F bir algoritmik analiz projesi.",
+      "TechnicalDetail": "Proje, teorik bilgisayar bilimi prensiplerinin pratik yaz\u0131l\u0131m m\u00FChendisli\u011Fi senaryolar\u0131na uygulanmas\u0131 amac\u0131yla \u015Fu teknik analiz ve geli\u015Ftirme a\u015Famalar\u0131yla y\u00FCr\u00FCt\u00FClm\u00FC\u015Ft\u00FCr:\n\n1. Grafik Teorisi ve En K\u0131sa Yol (Shortest Path) Modellemeleri:\n- A\u011F ve Rota Optimizasyonu: Grafik (Graph) veri yap\u0131lar\u0131 \u00FCzerinde Dijkstra, Bellman-Ford ve A* gibi en k\u0131sa yol algoritmalar\u0131, d\u00FC\u011F\u00FCm (Node) ve kenar (Edge) yo\u011Funlu\u011Fu y\u00FCksek kompleks veri setleri \u00FCzerinde test edilmi\u015Ftir.\n- Algoritma Kar\u015F\u0131la\u015Ft\u0131rmalar\u0131: Farkl\u0131 grafik topolojilerinde algoritmalar\u0131n negatif kenar a\u011F\u0131rl\u0131klar\u0131, d\u00F6ng\u00FCler ve yo\u011Funluk durumlar\u0131ndaki davran\u0131\u015Flar\u0131 analiz edilerek, senaryoya en uygun yakla\u015F\u0131m\u0131n se\u00E7ilmesi sa\u011Flanm\u0131\u015Ft\u0131r.\n\n2. Big-O Karma\u015F\u0131kl\u0131k Analizi ve Performans Profiling (Time/Space):\n- Matematiksel Analiz: Geli\u015Ftirilen ve test edilen t\u00FCm algoritmalar\u0131n en iyi (Best), ortalama (Average) ve en k\u00F6t\u00FC (Worst Case) durum senaryolar\u0131 i\u00E7in zaman (Time) ve alan (Space) karma\u015F\u0131kl\u0131klar\u0131 teorik olarak hesaplanm\u0131\u015Ft\u0131r.\n- Deneysel Do\u011Frulama (Empirical Analysis): Python\u0027\u0131n dahili profil \u00E7\u0131karma k\u00FCt\u00FCphaneleri (timeit, cProfile, memory_profiler) kullan\u0131larak, veri seti boyutu logaritmik olarak art\u0131r\u0131ld\u0131\u011F\u0131nda kodun bellek t\u00FCketimi ve CPU \u00E7al\u0131\u015Fma s\u00FCreleri milisaniye seviyesinde grafikle\u015Ftirilmi\u015F ve teorik Big-O \u00E7\u0131kt\u0131lar\u0131yla k\u0131yaslanm\u0131\u015Ft\u0131r.\n\n3. S\u0131ralama/Arama Algoritmalar\u0131 ve Veri Seti Optimizasyonu:\n- Geli\u015Fmi\u015F S\u0131ralama Yakla\u015F\u0131mlar\u0131: Quick Sort, Merge Sort ve Heap Sort gibi b\u00F6l-y\u00F6net (Divide and Conquer) tabanl\u0131 algoritmalar\u0131n, ard\u0131\u015F\u0131k veya rastgele da\u011F\u0131lm\u0131\u015F b\u00FCy\u00FCk veri bloklar\u0131 \u00FCzerindeki pivot se\u00E7im stratejileri ve bellek verimlilikleri analiz edilmi\u015Ftir.\n- Arama ve \u0130ndeksleme: Do\u011Frusal (Linear) ve ikili (Binary) arama algoritmalar\u0131n\u0131n, arama a\u011Fa\u00E7lar\u0131 (BST, AVL) ve Hash Table gibi geli\u015Fmi\u015F veri yap\u0131lar\u0131 \u00FCzerindeki performanslar\u0131 \u00F6l\u00E7\u00FClerek arama maliyetleri minimize edilmi\u015Ftir.",
+      "Tags": "Python, Algorithm Design, Big-O Complexity, Graph Theory, Sorting Algorithms, Performance Profiling, Optimization, Data Structures",
+      "SortOrder": 6
+    },
+    {
+      "Id": 8,
+      "Name": "MIPS Mimari Sim\u00FClat\u00F6r\u00FC",
+      "Summary": "Bilgisayar organizasyonu ve i\u015Flemci mimarisi prensiplerine sad\u0131k kal\u0131narak geli\u015Ftirilmi\u015F, alt seviye (low-level) donan\u0131m s\u00FCre\u00E7lerini yaz\u0131l\u0131m ortam\u0131nda modelleyen MIPS tabanl\u0131 bir mimari sim\u00FClat\u00F6r\u00FC. Proje; MIPS Assembly komut setlerinin (ISA) binary/hexadecimal seviyede ayr\u0131\u015Ft\u0131r\u0131lmas\u0131n\u0131, asenkron komut i\u015Fleme d\u00F6ng\u00FClerinin (Instruction Cycle) sim\u00FCle edilmesini ve kaydedici (register) ile bellek durumlar\u0131n\u0131n ger\u00E7ek zamanl\u0131 y\u00F6netimini kapsar.",
+      "TechnicalDetail": "Sim\u00FClat\u00F6r projesi, soyut donan\u0131m konseptlerini somut ve \u00E7al\u0131\u015Fan bir yaz\u0131l\u0131m mimarisine d\u00F6n\u00FC\u015Ft\u00FCrmek amac\u0131yla \u015Fu teknik katmanlar ve mant\u0131ksal bloklar \u00FCzerinde in\u015Fa edilmi\u015Ftir:\n\n1. Komut Seti Mimarisi (ISA) ve Kod \u00C7\u00F6zme (Decoding):\n- Komut Ayr\u0131\u015Ft\u0131rma: Assembly dilinde yaz\u0131lan veya makine diline (machine code) d\u00F6n\u00FC\u015Ft\u00FCr\u00FClm\u00FC\u015F olan MIPS komutlar\u0131, formatlar\u0131na g\u00F6re (R-Type, I-Type, J-Type) bit maskeleme y\u00F6ntemleriyle dinamik olarak ayr\u0131\u015Ft\u0131r\u0131lm\u0131\u015Ft\u0131r.\n- Opcode ve Fonksiyon Analizi: Her komutun operasyon kodu (opcode), kaynak yazma\u00E7lar\u0131 (rs, rt), hedef yazmac\u0131 (rd) ve adres/offset de\u011Ferleri yaz\u0131l\u0131m katman\u0131nda asenkron fonksiyonlarla \u00E7\u00F6z\u00FCmlenerek y\u00FCr\u00FCtme birimine (Execution Unit) iletilmi\u015Ftir.\n\n2. \u0130\u015Flemci D\u00F6ng\u00FCs\u00FC (Instruction Cycle) Modellemesi:\n- Donan\u0131m D\u00F6ng\u00FCs\u00FC Sim\u00FClasyonu: Bir i\u015Flemcinin temel \u00E7al\u0131\u015Fma prensibi olan 5 a\u015Famal\u0131 komut i\u015Fleme hatt\u0131 (Instruction Pipeline) mant\u0131\u011F\u0131 yaz\u0131l\u0131msal olarak sim\u00FCle edilmi\u015Ftir:\n  * Instruction Fetch (Komut Getirme): Program Sayac\u0131 (PC) \u00FCzerinden s\u0131radaki komutun bellekten okunmas\u0131.\n  * Instruction Decode (Komut \u00C7\u00F6zme): Komutun t\u00FCr\u00FCn\u00FCn ve ihtiya\u00E7 duydu\u011Fu yazma\u00E7lar\u0131n belirlenmesi.\n  * Execute (Y\u00FCr\u00FCtme): ALU (Aritmetik Mant\u0131k Birimi) operasyonlar\u0131n\u0131n (toplama, \u00E7\u0131karma, mant\u0131ksal i\u015Flemler) yaz\u0131l\u0131msal olarak icra edilmesi.\n  * Memory Access (Bellek Eri\u015Fimi): Veri belle\u011Finden (Data Memory) okuma/yazma (lw, sw) i\u015Flemlerinin yap\u0131lmas\u0131.\n  * Write-Back (Geri Yazma): \u0130\u015Flem sonucunun hedef yazmaca g\u00FCvenli bir \u015Fekilde kaydedilmesi.\n\n3. Yazma\u00E7 (Register) ve Bellek Birimlerinin Y\u00F6netimi:\n- State Management: MIPS mimarisinde bulunan 32 adet genel ama\u00E7l\u0131 yazma\u00E7 ($zero sabiti, $t, $s yazma\u00E7lar\u0131 vb.) ve Program Sayac\u0131 (PC), uygulaman\u0131n merkezi durum y\u00F6netiminde (State) sim\u00FCle edilmi\u015Ftir. \n- Bellek Haritalama (Memory Mapping): Komut belle\u011Fi (Instruction Memory) ve Veri belle\u011Fi (Data Memory) i\u00E7in sanal adres alanlar\u0131 olu\u015Fturulmu\u015F; dallanma (branching - beq, bne) ve atlama (jumping - j, jal) komutlar\u0131nda adres hesaplamalar\u0131n\u0131n donan\u0131m hassasiyetinde yap\u0131lmas\u0131 sa\u011Flanm\u0131\u015Ft\u0131r.",
+      "Tags": "JavaScript, MIPS Architecture, Assembly Language, Computer Organization, Instruction Set Architecture (ISA), Processor Simulation, Instruction Cycle, CPU Registers, Memory Modeling, Low-Level Programming",
+      "SortOrder": 7
+    },
+    {
+      "Id": 9,
+      "Name": "Full-Stack Developer Portfolio \u0026 CMS Architecture",
+      "Summary": "Modern yaz\u0131l\u0131m geli\u015Ftirme pratiklerine uygun olarak, .NET 8 Web API ve Blazor WebAssembly teknolojileriyle s\u0131f\u0131rdan in\u015Fa edilmi\u015F dinamik i\u00E7erik y\u00F6netim sistemli (CMS) ki\u015Fisel portfolyo projesi. Tamamen ayr\u0131k (decoupled) frontend ve backend mimarisine sahip olan sistem; yeteneklerin, projelerin, deneyimlerin ve gelen ziyaret\u00E7i mesajlar\u0131n\u0131n ger\u00E7ek zamanl\u0131 y\u00F6netimini sa\u011Flar.",
+      "TechnicalDetail": "Proje, kurumsal yaz\u0131l\u0131m standartlar\u0131na uygun, s\u00FCrd\u00FCr\u00FClebilir ve test edilebilir bir altyap\u0131 sunmak amac\u0131yla \u015Fu mimari bile\u015Fenlerle geli\u015Ftirilmi\u015Ftir:\n\n1. Arka Plan (Backend) Mimarisi:\n- \u00C7ok Katmanl\u0131 Mimari (N-Tier Architecture): Proje; Domain, DataAccess, Business ve API olmak \u00FCzere 4 ana katmana ayr\u0131larak gev\u015Fek ba\u011Fl\u0131l\u0131k (loose coupling) prensibiyle tasarlanm\u0131\u015Ft\u0131r.\n- RESTful API: Client (Blazor) katman\u0131n\u0131n t\u00FCketebilece\u011Fi, HTTP standartlar\u0131na (GET, POST, DELETE) uygun g\u00FCvenli endpoint\u0027ler tasarlanm\u0131\u015Ft\u0131r.\n- Entity Framework Core \u0026 Code-First: Veritaban\u0131 modeli C# s\u0131n\u0131flar\u0131 \u00FCzerinden kodlanm\u0131\u015F, migrasyonlar (Migrations) vas\u0131tas\u0131yla MS SQL Server \u00FCzerinde asenkron veri ak\u0131\u015Flar\u0131yla y\u00F6netilmi\u015Ftir.\n\n2. Veri G\u00FCvenli\u011Fi ve D\u00F6n\u00FC\u015F\u00FCm\u00FC:\n- JWT (JSON Web Token) Kimlik Do\u011Frulama: Admin panelinin g\u00FCvenli\u011Fi, API katman\u0131nda \u00FCretilen ve Blazor taraf\u0131nda lokal haf\u0131zada ta\u015F\u0131nan rollerle (Authorize \u00F6znitelikleriyle) koruma alt\u0131na al\u0131nm\u0131\u015Ft\u0131r.\n- AutoMapper \u0026 DTO (Data Transfer Object) Tasar\u0131m\u0131: Veritaban\u0131 varl\u0131klar\u0131n\u0131n (Entities) d\u0131\u015F d\u00FCnyaya do\u011Frudan a\u00E7\u0131lmas\u0131n\u0131 engellemek ve a\u011F trafi\u011Fini optimize etmek ad\u0131na DTO\u0027lar kullan\u0131lm\u0131\u015F, e\u015Fle\u015Fmeler a\u00E7\u0131k tan\u0131ml\u0131 AutoMapper kurallar\u0131yla (Explicit Mapping) y\u00F6netilmi\u015Ftir.\n\n3. \u00D6n Y\u00FCz (Frontend) Mimarisi:\n- Blazor WebAssembly (WASM): SPA (Single Page Application) mant\u0131\u011F\u0131nda, tamamen istemci taraf\u0131nda (Client-Side) \u00E7al\u0131\u015Fan, C# ile HTML/CSS entegrasyonunu harmanlayan performansl\u0131 bir aray\u00FCz geli\u015Ftirilmi\u015Ftir.\n- Asenkron Servis Entegrasyonu: UI katman\u0131, arka plandaki API ile HttpClientFactory ve asenkron (async/await) yap\u0131lar kullanarak tamamen kesintisiz ve JSON tabanl\u0131 bir ileti\u015Fim kurar.",
+      "Tags": ".NET 8, ASP.NET Core Web API, Blazor WebAssembly, Entity Framework Core, MS SQL Server, JWT Authentication, AutoMapper, N-Tier Architecture, RESTful API",
+      "SortOrder": 2
+    }
+  ],
+  "Skills": [
+    {
+      "Id": 5,
+      "Name": "C#, JavaScript, Python, SQL, ",
+      "Category": "Programlama Dilleri"
+    },
+    {
+      "Id": 6,
+      "Name": "NET (ASP.NET Core), EF Core, Blazor(WebAssembly / Server), React Native, React.js, Node.js",
+      "Category": "Frameworkler \u0026 K\u00FCt\u00FCphaneler"
+    },
+    {
+      "Id": 7,
+      "Name": "Git, Docker, Nginx, REST API, Jenkins",
+      "Category": "DevOps \u0026 Ara\u00E7lar"
+    },
+    {
+      "Id": 8,
+      "Name": "Mikroservisler, OOP, Algoritma Analizi, Da\u011F\u0131t\u0131k Sistemler",
+      "Category": "Kavramsal"
+    },
+    {
+      "Id": 9,
+      "Name": "MS SQL Server, MongoDB",
+      "Category": "Veritaban\u0131"
+    }
+  ],
+  "Messages": [
+    {
+      "Id": 6,
+      "FullName": "Mehmet Atakan K\u0131l\u0131\u00E7",
+      "Email": "atakllc3@gmail.com",
+      "Subject": "selan",
+      "Content": "eee garda\u015F",
+      "DateSent": "2026-05-18T13:02:12.3566223",
+      "IsRead": true
+    }
+  ]
+}

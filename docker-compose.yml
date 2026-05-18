@@ -3,15 +3,16 @@ version: '3.8'
 services:
   # Database Service (MSSQL Server)
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: postgres:15-alpine
     container_name: portfolio-db
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=YourSecurePassword123!
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=YourSecurePassword123!
+      - POSTGRES_DB=EmrePortfolioDb
     ports:
-      - "1433:1433"
+      - "5432:5432"
     volumes:
-      - db-data:/var/opt/mssql
+      - db-data:/var/lib/postgresql/data
     restart: always
 
   # Backend API Service
@@ -20,11 +21,10 @@ services:
       context: .
       dockerfile: Portfolio.API/Dockerfile
     container_name: portfolio-api
+    env_file:
+      - Portfolio.API/.env
     environment:
-      - DB_CONNECTION_STRING=Server=db;Database=EmrePortfolioDb;User Id=sa;Password=YourSecurePassword123!;TrustServerCertificate=True;
-      - JWT_KEY=EmreHakseverPortfolioProjectSecretKey2026
-      - ADMIN_USERNAME=emre
-      - ADMIN_PASSWORD=Emre12345!
+      - DB_CONNECTION_STRING=Host=db;Database=EmrePortfolioDb;Username=postgres;Password=YourSecurePassword123!
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "5000:8080"

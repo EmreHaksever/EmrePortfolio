@@ -39,7 +39,7 @@ var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseNpgsql(connectionString));
 
 // Sisteme diyoruz ki: "Biri senden IProjectService isterse, ona ProjectManager ver."
 // AutoMapper'a "Profil kurallarını bu projedeki Assembly içinde ara" diyoruz
@@ -144,8 +144,30 @@ using (var scope = app.Services.CreateScope())
     
     try
     {
-        // 1. Bekleyen veritabanı migrasyonlarını otomatik olarak uygula
-        context.Database.Migrate();
+        // 1. Bekleyen veritabanı migrasyonlarını otomatik olarak uygula (Retry mekanizmalı)
+        int retryCount = 0;
+        int maxRetry = 6;
+        bool migrationSucceeded = false;
+        
+        while (!migrationSucceeded && retryCount < maxRetry)
+        {
+            try
+            {
+                context.Database.Migrate();
+                migrationSucceeded = true;
+                Console.WriteLine("[Database] Migrasyonlar başarıyla uygulandı.");
+            }
+            catch (Exception ex)
+            {
+                retryCount++;
+                Console.WriteLine($"[Database] Veritabanına bağlanılamadı. Yeniden deneniyor ({retryCount}/{maxRetry})... Hata: {ex.Message}");
+                if (retryCount >= maxRetry)
+                {
+                    throw; // Maksimum denemeye ulaşıldıysa yukarıdaki ana catch bloğuna fırlat
+                }
+                System.Threading.Thread.Sleep(3000); // 3 saniye bekle
+            }
+        }
 
         // 2. .env dosyasındaki admin bilgilerini al, yoksa varsayılanları ata
         var adminUsername = Environment.GetEnvironmentVariable("ADMIN_USERNAME") ?? "emre";
@@ -162,6 +184,67 @@ using (var scope = app.Services.CreateScope())
                 Password = adminPassword
             });
             await context.SaveChangesAsync();
+        }
+
+        // 4. Eski MSSQL verilerini (data_backup.json) içeri aktar
+        var backupPath = Path.Combine(AppContext.BaseDirectory, "data_backup.json");
+        if (File.Exists(backupPath) && !await context.Experiences.AnyAsync())
+        {
+            var jsonString = await File.ReadAllTextAsync(backupPath);
+            var backupOptions = new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            
+            // AppUser sınıfı için bir anonim tip kullanamayız çünkü Domain nesnesi bekliyor.
+            // Fakat AppUser dışında kalan tüm verileri ekleyebiliriz (Zaten admin eklendi).
+            // BackupData sınıfını burada geçici bir anonymous veya record ile okuyamayız,
+            // JSON içerisindeki dizileri dinamik olarak okumak daha güvenli:
+            using var doc = System.Text.Json.JsonDocument.Parse(jsonString);
+            var root = doc.RootElement;
+            
+            if (root.TryGetProperty("AppUsers", out var appUsersEl) && !await context.AppUsers.AnyAsync())
+            {
+                var appUsers = System.Text.Json.JsonSerializer.Deserialize<List<AppUser>>(appUsersEl.GetRawText(), backupOptions);
+                if (appUsers != null) await context.AppUsers.AddRangeAsync(appUsers);
+            }
+            if (root.TryGetProperty("ProfileInfos", out var profilesEl))
+            {
+                var profiles = System.Text.Json.JsonSerializer.Deserialize<List<ProfileInfo>>(profilesEl.GetRawText(), backupOptions);
+                if (profiles != null) await context.ProfileInfos.AddRangeAsync(profiles);
+            }
+            if (root.TryGetProperty("Experiences", out var experiencesEl))
+            {
+                var experiences = System.Text.Json.JsonSerializer.Deserialize<List<Experience>>(experiencesEl.GetRawText(), backupOptions);
+                if (experiences != null) await context.Experiences.AddRangeAsync(experiences);
+            }
+            if (root.TryGetProperty("Projects", out var projectsEl))
+            {
+                var projects = System.Text.Json.JsonSerializer.Deserialize<List<Project>>(projectsEl.GetRawText(), backupOptions);
+                if (projects != null) await context.Projects.AddRangeAsync(projects);
+            }
+            if (root.TryGetProperty("Skills", out var skillsEl))
+            {
+                var skills = System.Text.Json.JsonSerializer.Deserialize<List<Skill>>(skillsEl.GetRawText(), backupOptions);
+                if (skills != null) await context.Skills.AddRangeAsync(skills);
+            }
+            if (root.TryGetProperty("Messages", out var messagesEl))
+            {
+                var messages = System.Text.Json.JsonSerializer.Deserialize<List<Message>>(messagesEl.GetRawText(), backupOptions);
+                if (messages != null) await context.Messages.AddRangeAsync(messages);
+            }
+
+            await context.SaveChangesAsync();
+            
+            // PostgreSQL'de Identity sequence'larını düzeltmek için (opsiyonel ancak tavsiye edilir, yeni kayıt eklerken hata vermemesi için)
+            try
+            {
+                await context.Database.ExecuteSqlRawAsync(@"
+                    SELECT setval('""Experiences_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""Experiences""));
+                    SELECT setval('""Projects_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""Projects""));
+                    SELECT setval('""Skills_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""Skills""));
+                    SELECT setval('""Messages_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""Messages""));
+                    SELECT setval('""ProfileInfos_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""ProfileInfos""));
+                    SELECT setval('""AppUsers_Id_seq""', (SELECT COALESCE(MAX(""Id""), 1) FROM ""AppUsers""));
+                ");
+            } catch { /* sequence update may fail if table is empty or names differ, safe to ignore during initial seed */ }
         }
     }
     catch (Exception ex)

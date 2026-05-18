@@ -14,6 +14,10 @@ builder.Services.AddTransient<JwtAuthorizationHandler>();
 
 // 2. HttpClient Factory'i kuruyoruz ve ApiBaseUrl değerini dinamik olarak okuyoruz
 var apiBaseUrl = builder.Configuration["ApiBaseUrl"] ?? "https://localhost:7032/";
+if (apiBaseUrl == "/")
+{
+    apiBaseUrl = builder.HostEnvironment.BaseAddress;
+}
 
 builder.Services.AddHttpClient("PortfolioAPI", client =>
 {

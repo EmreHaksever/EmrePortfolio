@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Portfolio.Domain.Entities;
 
 
@@ -30,6 +30,17 @@ public class PortfolioDbContext : DbContext
 
         modelBuilder.Entity<ProfileInfo>()
             .Property(p => p.Summary)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
+
+        // PostgreSQL'de DateTime tipini SQL Server'daki gibi (timezone bilgisi olmadan) 'timestamp without time zone' olarak eşle
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+        {
+            var properties = entityType.GetProperties()
+                .Where(p => p.ClrType == typeof(DateTime) || p.ClrType == typeof(DateTime?));
+            foreach (var property in properties)
+            {
+                property.SetColumnType("timestamp without time zone");
+            }
+        }
     }
 }
