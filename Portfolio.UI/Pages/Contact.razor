@@ -4,14 +4,7 @@
 @inject ProfileService ProfileService
 @inject MessageService MessageService
 
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h2 class="display-5 fw-bold  mb-3">İletişime Geçin</h2>
-        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
-            Projeleriniz, iş teklifleriniz veya sadece merhaba demek için bana ulaşabilirsiniz.
-        </p>
-    </div>
-
+<div class="container py-3 d-flex flex-column align-items-center justify-content-center" style="min-height: 80vh;">
     @if (profile == null)
     {
         <div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
@@ -22,105 +15,105 @@
     }
     else
     {
-    <div class="mx-auto mt-4 shadow-lg border-0 rounded-4 overflow-hidden bg-white d-flex flex-column flex-lg-row" style="max-width: 1100px; min-height: 650px;">
+    <div class="w-100 mx-auto shadow-lg border-0 rounded-4 overflow-hidden bg-white d-flex flex-column flex-lg-row" style="max-width: 980px; min-height: 520px;">
         <!-- Left Side: Contact Info -->
-        <div class="p-4 p-md-5 text-white position-relative overflow-hidden d-flex flex-column" style="flex: 0 0 40%; background: linear-gradient(135deg, var(--accent-primary) 0%, #0369a1 100%); min-width: 350px;">
+        <div class="p-4 p-md-4 text-white position-relative overflow-hidden d-flex flex-column" style="flex: 0 0 38%; background: linear-gradient(135deg, var(--accent-primary) 0%, #0369a1 100%); min-width: 320px;">
             <!-- Decorative background elements -->
             <div class="position-absolute" style="top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
             <div class="position-absolute" style="bottom: 20%; left: -30px; width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
 
-            <div class="position-relative z-1">
-                <h3 class="fw-bold mb-4">İletişim Bilgileri</h3>
-                <p class="mb-5 opacity-75">Formu doldurarak bana mesaj gönderebilir veya aşağıdaki kanallar üzerinden doğrudan ulaşabilirsiniz.</p>
+            <div class="position-relative z-1 d-flex flex-column h-100">
+                <h3 class="fw-bold mb-3">İletişim Bilgileri</h3>
+                <p class="mb-4 opacity-75 small">Formu doldurarak bana mesaj gönderebilir veya aşağıdaki kanallar üzerinden doğrudan ulaşabilirsiniz.</p>
 
-                <div class="d-flex flex-column gap-4">
+                <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center">
-                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <i class="bi bi-envelope-fill fs-5"></i>
+                        <div class="p-2 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                            <i class="bi bi-envelope-fill fs-6"></i>
                         </div>
                         <div>
-                            <div class="small opacity-75">E-posta</div>
-                            <a href="mailto:@profile.Email" class="text-white text-decoration-none fw-medium">@profile.Email</a>
+                            <div class="small opacity-75" style="font-size: 0.8rem;">E-posta</div>
+                            <a href="mailto:@profile.Email" class="text-white text-decoration-none fw-medium small">@profile.Email</a>
                         </div>
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <i class="bi bi-telephone-fill fs-5"></i>
+                        <div class="p-2 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                            <i class="bi bi-telephone-fill fs-6"></i>
                         </div>
                         <div>
-                            <div class="small opacity-75">Telefon</div>
-                            <a href="tel:@profile.Phone" class="text-white text-decoration-none fw-medium">@profile.Phone</a>
+                            <div class="small opacity-75" style="font-size: 0.8rem;">Telefon</div>
+                            <a href="tel:@profile.Phone" class="text-white text-decoration-none fw-medium small">@profile.Phone</a>
                         </div>
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <div class="p-3 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                            <i class="bi bi-geo-alt-fill fs-5"></i>
+                        <div class="p-2 rounded-circle bg-white bg-opacity-25 me-3 d-flex align-items-center justify-content-center" style="width: 42px; height: 42px;">
+                            <i class="bi bi-geo-alt-fill fs-6"></i>
                         </div>
                         <div>
-                            <div class="small opacity-75">Konum</div>
-                            <div class="fw-medium">Türkiye</div>
+                            <div class="small opacity-75" style="font-size: 0.8rem;">Konum</div>
+                            <div class="fw-medium small">Türkiye</div>
                         </div>
                     </div>
                 </div>
 
-                            <div class="mt-auto pt-5">
-                                <h6 class="small fw-bold text-uppercase tracking-wider opacity-50 mb-3">Sosyal Medya</h6>
-                                <div class="d-flex gap-3">
-                                    <a href="@(profile.LinkedInUrl?.StartsWith("http") == true ? profile.LinkedInUrl : $"https://{profile.LinkedInUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-linkedin text-primary"></i></a>
-                                    <a href="@(profile.GithubUrl?.StartsWith("http") == true ? profile.GithubUrl : $"https://{profile.GithubUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 40px; height: 40px;"><i class="bi bi-github text-dark"></i></a>
-                                </div>
-                            </div>
+                <div class="mt-auto pt-4">
+                    <h6 class="small fw-bold text-uppercase tracking-wider opacity-50 mb-2" style="font-size: 0.75rem;">Sosyal Medya</h6>
+                    <div class="d-flex gap-2">
+                        <a href="@(profile.LinkedInUrl?.StartsWith("http") == true ? profile.LinkedInUrl : $"https://{profile.LinkedInUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 36px; height: 36px;"><i class="bi bi-linkedin text-primary"></i></a>
+                        <a href="@(profile.GithubUrl?.StartsWith("http") == true ? profile.GithubUrl : $"https://{profile.GithubUrl}")" target="_blank" class="btn btn-sm btn-light rounded-circle p-0 d-flex align-items-center justify-content-center hover-scale" style="width: 36px; height: 36px;"><i class="bi bi-github text-dark"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Right Side: Contact Form -->
-        <div class="p-4 p-md-5 bg-white flex-grow-1">
+        <div class="p-4 bg-white flex-grow-1 d-flex flex-column justify-content-center">
             @if (isSuccess)
             {
-                <div class="alert alert-success border-0 shadow-sm rounded-3 py-3 mb-4 d-flex align-items-center" style="background: rgba(16, 185, 129, 0.1); color: #059669;">
-                    <i class="bi bi-check-circle-fill fs-4 me-3"></i>
+                <div class="alert alert-success border-0 shadow-sm rounded-3 py-2 px-3 mb-3 d-flex align-items-center" style="background: rgba(16, 185, 129, 0.1); color: #059669; font-size: 0.9rem;">
+                    <i class="bi bi-check-circle-fill fs-5 me-2"></i>
                     <div>
                         <div class="fw-bold">Harika!</div>
-                        <div class="small">Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağım.</div>
+                        <div class="small">Mesajınız başarıyla gönderildi.</div>
                     </div>
                 </div>
             }
 
-            <h3 class="fw-bold mb-4" style="color: var(--text-primary);">Mesaj Gönderin</h3>
+            <h3 class="fw-bold mb-3" style="color: var(--text-primary);">Mesaj Gönderin</h3>
             
             <EditForm Model="message" OnValidSubmit="HandleValidSubmit">
                 <DataAnnotationsValidator />
                 
-                <div class="row g-4">
+                <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Ad Soyad</label>
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider mb-1" style="font-size: 0.75rem;">Ad Soyad</label>
                         <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
-                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-person"></i></span>
-                            <InputText @bind-Value="message.FullName" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Adınız Soyadınız" required style="box-shadow: none;" />
+                            <span class="input-group-text border-0 bg-transparent text-muted py-1"><i class="bi bi-person"></i></span>
+                            <InputText @bind-Value="message.FullName" class="form-control border-0 bg-transparent py-1 ps-0" placeholder="Adınız Soyadınız" required style="box-shadow: none; font-size: 0.9rem;" />
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">E-posta</label>
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider mb-1" style="font-size: 0.75rem;">E-posta</label>
                         <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
-                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-envelope"></i></span>
-                            <InputText @bind-Value="message.Email" class="form-control border-0 bg-transparent py-2 ps-0" type="email" placeholder="ornek@mail.com" required style="box-shadow: none;" />
+                            <span class="input-group-text border-0 bg-transparent text-muted py-1"><i class="bi bi-envelope"></i></span>
+                            <InputText @bind-Value="message.Email" class="form-control border-0 bg-transparent py-1 ps-0" type="email" placeholder="ornek@mail.com" required style="box-shadow: none; font-size: 0.9rem;" />
                         </div>
                     </div>
                     <div class="col-12">
-                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Konu</label>
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider mb-1" style="font-size: 0.75rem;">Konu</label>
                         <div class="input-group bg-light rounded-3 border-0 overflow-hidden shadow-sm">
-                            <span class="input-group-text border-0 bg-transparent text-muted"><i class="bi bi-chat-left-dots"></i></span>
-                            <InputText @bind-Value="message.Subject" class="form-control border-0 bg-transparent py-2 ps-0" placeholder="Mesajınızın konusu" required style="box-shadow: none;" />
+                            <span class="input-group-text border-0 bg-transparent text-muted py-1"><i class="bi bi-chat-left-dots"></i></span>
+                            <InputText @bind-Value="message.Subject" class="form-control border-0 bg-transparent py-1 ps-0" placeholder="Mesajınızın konusu" required style="box-shadow: none; font-size: 0.9rem;" />
                         </div>
                     </div>
                     <div class="col-12">
-                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider">Mesajınız</label>
-                        <InputTextArea @bind-Value="message.Content" class="form-control bg-light border-0 rounded-3 py-3 shadow-sm" rows="6" placeholder="Size nasıl yardımcı olabilirim?" required style="box-shadow: none;"></InputTextArea>
+                        <label class="form-label small fw-bold text-secondary text-uppercase tracking-wider mb-1" style="font-size: 0.75rem;">Mesajınız</label>
+                        <InputTextArea @bind-Value="message.Content" class="form-control bg-light border-0 rounded-3 py-2 shadow-sm" rows="3" placeholder="Size nasıl yardımcı olabilirim?" required style="box-shadow: none; font-size: 0.9rem;"></InputTextArea>
                     </div>
-                    <div class="col-12 mt-4">
-                        <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-pill shadow-sm d-flex align-items-center justify-content-center gap-2 hover-scale transition-all" style="background: linear-gradient(to right, var(--accent-primary), #0284c7);">
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-pill shadow-sm d-flex align-items-center justify-content-center gap-2 hover-scale transition-all" style="background: linear-gradient(to right, var(--accent-primary), #0284c7); font-size: 0.95rem;">
                             <i class="bi bi-send-fill"></i> Mesajı İlet
                         </button>
                     </div>
